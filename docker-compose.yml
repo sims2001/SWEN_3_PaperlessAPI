@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  paperlessapi:
+    image: paperless-api
+    container_name: paperless-api
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - configuration=Debug
+    ports:
+      - 8081:8081
+    volumes:
+      - ./src/PaperLessApi:/app/src
+      - /app/src/bin
+      - /app/src/obj
