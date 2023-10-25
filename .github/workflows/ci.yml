@@ -21,7 +21,7 @@ jobs:
 
   
   build-and-upload:
-    needs: test
+    needs: test-api
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
