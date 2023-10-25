@@ -14,3 +14,7 @@ jobs:
       uses: isbang/compose-action@v1.5.1
       with:
         compose-file: "docker-compose.yml"
+    - name: Upload image
+      uses: ishworkh/docker-image-artifact-upload@v2.0.1
+      with:
+        image: "paperless-api:latest"
