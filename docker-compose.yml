@@ -6,7 +6,7 @@ services:
     container_name: paperless-api
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./src/PaperLessApi/Dockerfile
       args:
         - configuration=Debug
     ports:

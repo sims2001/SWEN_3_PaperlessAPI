@@ -5,7 +5,23 @@ on:
       - master
 
 jobs:
-  build:
+  test-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: DOTNET SETUP
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore Dependencies
+        run: dotnet restore src/PaperLessApi
+      - name: Test
+        run: dotnet test src/PaperLessApi --no-build --verbosity normal
+
+  
+  build-and-upload:
+    needs: test
     runs-on: ubuntu-latest
     steps:
     - name: Checkout

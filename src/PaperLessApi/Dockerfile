@@ -6,7 +6,7 @@ ENV ASPNETCORE_URLS=http://*:8081
 
 # Copy the code into the container
 WORKDIR /app/src
-COPY ./src/PaperLessApi .
+COPY . .
 
 # NuGet restore
 RUN dotnet restore
