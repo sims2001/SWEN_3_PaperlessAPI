@@ -2,6 +2,9 @@
 
 namespace PaperLessApi.Entities
 {
+    /// <summary>
+    /// DocumentType Entity for working in the Controllers
+    /// </summary>
     public class DocumentType
     {
         /// <summary>

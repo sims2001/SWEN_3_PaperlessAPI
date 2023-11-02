@@ -3,6 +3,9 @@ using System;
 
 namespace PaperLessApi.Entities
 {
+    /// <summary>
+    /// Correspondant Entity for working in the Controllers
+    /// </summary>
     public class Correspondent
     {
         /// <summary>

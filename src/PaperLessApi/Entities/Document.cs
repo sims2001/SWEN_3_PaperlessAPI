@@ -4,6 +4,9 @@ using System;
 
 namespace PaperLessApi.Entities
 {
+    /// <summary>
+    /// Document Entity for working in the Controllers
+    /// </summary>
     public class Document
     {
         /// <summary>

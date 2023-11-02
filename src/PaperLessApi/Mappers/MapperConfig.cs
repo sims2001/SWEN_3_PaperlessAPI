@@ -5,8 +5,14 @@ namespace PaperLessApi.Mappers
     using PaperLessApi.DTOs;
     using PaperLessApi.Entities;
 
+    /// <summary>
+    /// MapperConfig Class for Handling AutoMapping
+    /// </summary>
     public class MapperConfig
     {
+        /// <summary>
+        /// Static Function for an Initial AutoMapper
+        /// </summary>
         public static Mapper InitializeAutomapper()
         {
             //Provide all the Mapping Configuration

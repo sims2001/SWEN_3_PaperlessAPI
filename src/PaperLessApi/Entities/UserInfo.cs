@@ -2,6 +2,9 @@
 
 namespace PaperLessApi.Entities
 {
+    /// <summary>
+    /// UserInfo Entity for working in the Controllers
+    /// </summary>
     public class UserInfo
     {
         /// <summary>

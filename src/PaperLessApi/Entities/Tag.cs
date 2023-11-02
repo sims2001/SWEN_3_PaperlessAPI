@@ -2,6 +2,9 @@
 
 namespace PaperLessApi.Entities
 {
+    /// <summary>
+    /// Tag Entity for working in the Controllers
+    /// </summary>
     public class Tag
     {
         /// <summary>
