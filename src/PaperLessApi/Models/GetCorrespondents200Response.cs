@@ -18,7 +18,7 @@ using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using PaperLessApi.Converters;
 
-namespace PaperLessApi.DTOs
+namespace PaperLessApi.Models
 { 
     /// <summary>
     /// 
