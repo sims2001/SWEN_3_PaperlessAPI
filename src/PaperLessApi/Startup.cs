@@ -52,6 +52,7 @@ namespace PaperLessApi
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
 
             // Add framework services.
             services
@@ -99,6 +100,8 @@ namespace PaperLessApi
                 });
                 services
                     .AddSwaggerGenNewtonsoftSupport();
+
+
         }
 
         /// <summary>
@@ -120,6 +123,11 @@ namespace PaperLessApi
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
             app.UseSwagger(c =>
                 {
                     c.RouteTemplate = "openapi/{documentName}/openapi.json";
