@@ -430,7 +430,7 @@ namespace PaperLessApi.Controllers
                 ]
             }";
 
-            return Ok(System.Text.Json.JsonSerializer.Deserialize<object>(result));
+            return new ObjectResult(result);
 
 
 
