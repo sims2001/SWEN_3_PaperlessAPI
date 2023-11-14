@@ -1,28 +1,28 @@
 version: '3.4'
 
 services:
-  paperless-api:
-    image: paperless-api
-    container_name: paperless-api
-    build:
-      context: .
-      dockerfile: ./PaperLess.Api/Dockerfile
-      args:
-        - configuration=Debug
+  paperless-webapi:
+    image: paperless-webapi
+    container_name: paperless-webapi
     ports:
       - 8081:8081
-    volumes:
-      - ./PaperLess.Api:/app/src
-      - /app/src/bin
-      - /app/src/obj
+    networks:
+      - paperless-network
+    depends_on:
+      - paperless-frontend
 
   paperless-frontend:
     image: nginx:latest
+    container_name: paperless-frontend
     ports:
       - 80:80
       - 443:443
     volumes:
       - ./PaperLess.Frontend:/usr/share/nginx/html/
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - paperless-api
+    networks:
+      - paperless-network
+
+networks:
+  paperless-network:
+    driver: bridge
