@@ -23,4 +23,4 @@ WORKDIR /app
 
 COPY --from=build /app/PaperLess.WebApi/out ./
 
-ENTRYPOINT ["dotnet", "PaperLessWebApi.dll"]
+ENTRYPOINT ["dotnet", "PaperLess.WebApi.dll"]
