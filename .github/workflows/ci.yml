@@ -5,32 +5,22 @@ on:
       - master
 
 jobs:
-  test-api:
+  build-and-push:
+    name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: DOTNET SETUP
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 6.0.x
-      - name: Restore Dependencies
-        run: dotnet restore src/PaperLessApi
-      - name: Test
-        run: dotnet test src/PaperLessApi --no-build --verbosity normal
 
-  
-  build-and-upload:
-    needs: test-api
-    runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Compose Docker
-      uses: isbang/compose-action@v1.5.1
-      with:
-        compose-file: "docker-compose.yml"
-    - name: Upload image
-      uses: ishworkh/docker-image-artifact-upload@v2.0.1
-      with:
-        image: "paperless-api:latest"
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker
+      uses: docker/setup-docker@v2
+
+    - name: Login to Docker Hub
+      run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build and push Docker image
+      run: |
+        docker build -f PaperLess.WebApi/Dockerfile -t paperless-webapi .
+        docker tag paperless-webapi ${{ secrets.DOCKERHUB_USERNAME }}/paperless-webapi:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/paperless-webapi:latest

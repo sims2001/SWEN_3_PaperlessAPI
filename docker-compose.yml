@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   paperless-webapi:
-    image: paperless-webapi
+    image: sims2001/paperless-webapi
     container_name: paperless-webapi
     ports:
       - 8081:8081
