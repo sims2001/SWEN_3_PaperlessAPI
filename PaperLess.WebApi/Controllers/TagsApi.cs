@@ -10,6 +10,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using Newtonsoft.Json;
 using PaperLess.BusinessLogic.Entities;
 using PaperLess.BusinessLogic.Interfaces;
+using PaperLess.BusinessLogic.Validation;
 using PaperLess.WebApi.Attributes;
 using PaperLess.WebApi.Models;
 
@@ -36,29 +37,19 @@ namespace PaperLess.WebApi.Controllers
         [HttpPost]
         [Route("/api/tags/")]
         [Consumes("application/json")]
-        [ValidateModelState]
         [SwaggerOperation("CreateTag")]
         [SwaggerResponse(statusCode: 200, type: typeof(CreateTag200Response), description: "Success")]
         public virtual IActionResult CreateTag([FromBody]CreateTagRequest createTagRequest) {
             
             Tag newTag = _mapper.Map<Tag>(createTagRequest);
 
-            Tag createdTag = _logic.NewTag(newTag);
+            BusinessLogicResult<Tag> result = _logic.NewTag(newTag);
 
-            CreateTag200Response response = _mapper.Map<CreateTag200Response>(createdTag);
+            if (!result.IsSuccess)
+                return BadRequest(new { errors = result.Errors } ); 
+
+            CreateTag200Response response = _mapper.Map<CreateTag200Response>(result.Result);
             return new ObjectResult(response);
-
-
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(CreateTag200Response));
-            string exampleJson = null;
-            exampleJson = "{\n  \"owner\" : 1,\n  \"matching_algorithm\" : 6,\n  \"user_can_change\" : true,\n  \"color\" : \"color\",\n  \"is_insensitive\" : true,\n  \"name\" : \"name\",\n  \"match\" : \"match\",\n  \"id\" : 0,\n  \"text_color\" : \"text_color\",\n  \"is_inbox_tag\" : true,\n  \"slug\" : \"slug\"\n}";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<CreateTag200Response>(exampleJson)
-            : default(CreateTag200Response);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
         }
 
         /// <summary>
@@ -68,15 +59,13 @@ namespace PaperLess.WebApi.Controllers
         /// <response code="204">Success</response>
         [HttpDelete]
         [Route("/api/tags/{id}/")]
-        [ValidateModelState]
         [SwaggerOperation("DeleteTag")]
         public virtual IActionResult DeleteTag([FromRoute (Name = "id")][Required]int id)
         {
 
-            //TODO: Uncomment the next line to return response 204 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            return StatusCode(204);
+            _logic.DeleteTag(id);
 
-            throw new NotImplementedException();
+            return StatusCode(204);
         }
 
         /// <summary>
@@ -87,11 +76,12 @@ namespace PaperLess.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet]
         [Route("/api/tags/")]
-        [ValidateModelState]
         [SwaggerOperation("GetTags")]
         [SwaggerResponse(statusCode: 200, type: typeof(GetTags200Response), description: "Success")]
         public virtual IActionResult GetTags([FromQuery (Name = "page")]int? page, [FromQuery (Name = "full_perms")]bool? fullPerms)
         {
+
+            
 
             //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
             // return StatusCode(200, default(GetTags200Response));
@@ -114,22 +104,19 @@ namespace PaperLess.WebApi.Controllers
         [HttpPut]
         [Route("/api/tags/{id}/")]
         [Consumes("application/json")]
-        [ValidateModelState]
         [SwaggerOperation("UpdateTag")]
         [SwaggerResponse(statusCode: 200, type: typeof(UpdateTag200Response), description: "Success")]
         public virtual IActionResult UpdateTag([FromRoute (Name = "id")][Required]int id, [FromBody]UpdateTagRequest updateTagRequest)
         {
 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(UpdateTag200Response));
-            string exampleJson = null;
-            exampleJson = "{\n  \"owner\" : 5,\n  \"matching_algorithm\" : 6,\n  \"user_can_change\" : true,\n  \"document_count\" : 1,\n  \"color\" : \"color\",\n  \"is_insensitive\" : true,\n  \"name\" : \"name\",\n  \"match\" : \"match\",\n  \"id\" : 0,\n  \"text_color\" : \"text_color\",\n  \"is_inbox_tag\" : true,\n  \"slug\" : \"slug\"\n}";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<UpdateTag200Response>(exampleJson)
-            : default(UpdateTag200Response);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
+            Tag updateTag = _mapper.Map<Tag>(updateTagRequest);
+            BusinessLogicResult<Tag> result = _logic.UpdateTag(id, updateTag);
+
+            if (!result.IsSuccess)
+                return BadRequest(new { errors = result.Errors });
+
+            UpdateTag200Response response = _mapper.Map<UpdateTag200Response>(result.Result);
+            return new ObjectResult(response);
         }
     }
 }

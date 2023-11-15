@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using PaperLess.BusinessLogic.Entities;
 
-namespace PaperLess.BusinessLogic.Validators {
+namespace PaperLess.BusinessLogic.Validation {
     public class DocumentValidator : AbstractValidator<Document> {
         public DocumentValidator() {
             RuleFor(document => document.Correspondent).NotNull().WithMessage("Correspondent is required");

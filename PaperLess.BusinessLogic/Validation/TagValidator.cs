@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using PaperLess.BusinessLogic.Entities;
 
-namespace PaperLess.BusinessLogic.Validators {
+namespace PaperLess.BusinessLogic.Validation {
     public class TagValidator : AbstractValidator<Tag> {
         public TagValidator() {
            // RuleFor(tag => tag.Slug).NotEmpty().WithMessage("Slug is required");

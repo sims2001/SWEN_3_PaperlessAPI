@@ -24,7 +24,7 @@ using Newtonsoft.Json.Serialization;
 using PaperLess.BusinessLogic;
 using PaperLess.BusinessLogic.Entities;
 using PaperLess.BusinessLogic.Interfaces;
-using PaperLess.BusinessLogic.Validators;
+using PaperLess.BusinessLogic.Validation;
 using PaperLess.WebApi.Authentication;
 using PaperLess.WebApi.OpenApi;
 using PaperLess.WebApi.Filters;

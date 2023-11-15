@@ -2,6 +2,7 @@
 using FluentValidation.Results;
 using PaperLess.BusinessLogic.Entities;
 using PaperLess.BusinessLogic.Interfaces;
+using PaperLess.BusinessLogic.Validation;
 
 namespace PaperLess.BusinessLogic {
 
@@ -14,30 +15,55 @@ namespace PaperLess.BusinessLogic {
         }
 
 
-        public Tag GetTags(int? page, bool? fullPerms) {
+        public List<Tag> GetTags(int? page, bool? fullPerms) {
             throw new NotImplementedException();
         }
 
-        public Tag NewTag(Tag tag) {
+        public BusinessLogicResult<Tag> NewTag(Tag tag) {
 
-            ValidationResult result = _validator.Validate(tag);
-            Console.WriteLine("######################### PAUSEEEE ####################### \n \n \n ");
-            Console.WriteLine( result.ToString() );
+            ValidationResult validationResult = _validator.Validate(tag);
 
-            if (result.IsValid)
-                tag.Color = "didit!";
-            else
-                tag.Color = "nodidit";
-            
-            return tag;
-            throw new NotImplementedException();
+            if (!validationResult.IsValid) {
+                return new BusinessLogicResult<Tag> {
+                    IsSuccess = false,
+                    Errors = validationResult.Errors.Select(error => error.ErrorMessage).ToList()
+                };
+            }
+
+            tag.Color = "funnyfink";
+            //TODO: IMPLEMENT DB CALL
+
+
+            return new BusinessLogicResult<Tag> {
+                IsSuccess = true,
+                Result = tag
+            };
+
         }
 
-        public Tag UpdateTag(int id, Tag tag) {
-            throw new NotImplementedException();
+        public BusinessLogicResult<Tag> UpdateTag(int id, Tag tag) {
+            ValidationResult validationResult = _validator.Validate(tag);
+
+            if (!validationResult.IsValid) {
+                return new BusinessLogicResult<Tag> {
+                    IsSuccess = false,
+                    Errors = validationResult.Errors.Select(error => error.ErrorMessage).ToList()
+                };
+            }
+
+            tag.Color = "updated";
+            //TODO: IMPLEMENT DB CALL
+
+
+            return new BusinessLogicResult<Tag> {
+                IsSuccess = true,
+                Result = tag
+            };
         }
 
         public void DeleteTag(int id) {
+
+            //_dbService
             throw new NotImplementedException();
         }
     }

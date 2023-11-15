@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using PaperLess.BusinessLogic.Entities;
 
-namespace PaperLess.BusinessLogic.Validators {
+namespace PaperLess.BusinessLogic.Validation {
     public class DocumentTypeValidator : AbstractValidator<DocumentType> {
         public DocumentTypeValidator() {
             RuleFor(documentType => documentType.Slug).NotEmpty().WithMessage("Slug is required");

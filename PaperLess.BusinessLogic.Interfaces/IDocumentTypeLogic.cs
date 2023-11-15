@@ -4,9 +4,9 @@ namespace PaperLess.BusinessLogic.Interfaces {
 
     public interface IDocumentTypeLogic {
         public List<DocumentType> GetDocumentTypes(int? page, bool? fullPerms);
-        public DocumentType CreateDocumentType(DocumentType documentType);
-        public DocumentType UpdateDocumentType(int id,  DocumentType documentType);
-        public DocumentType DeleteDocumentType(int id);
+        public BusinessLogicResult<DocumentType> CreateDocumentType(DocumentType documentType);
+        public BusinessLogicResult<DocumentType> UpdateDocumentType(int id,  DocumentType documentType);
+        public void DeleteDocumentType(int id);
 
     }
 

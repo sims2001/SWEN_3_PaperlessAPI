@@ -5,9 +5,9 @@ namespace PaperLess.BusinessLogic.Interfaces {
     public interface IDocumentLogic {
         public List<Document> GetDocuments(int? page,int? pageSize, string query, string ordering, List<int> tagsIdAll, int? documentTypeId, int? storagePathIdIn, int? correspondentId, bool? truncateContent);
         public void CreateDocument(Document document);
-        public Document GetDocument(int id, int? page, bool? fullPerms);
-        public Document UpdateDocument(int id, Document document);
-        public Document DeleteDocument(int id);
+        public BusinessLogicResult<Document> GetDocument(int id, int? page, bool? fullPerms);
+        public BusinessLogicResult<Document> UpdateDocument(int id, Document document);
+        public void DeleteDocument(int id);
 
     }
 

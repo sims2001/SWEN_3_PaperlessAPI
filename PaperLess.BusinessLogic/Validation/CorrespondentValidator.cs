@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using PaperLess.BusinessLogic.Entities;
 
-namespace PaperLess.BusinessLogic.Validators {
+namespace PaperLess.BusinessLogic.Validation {
 
     public class CorrespondentValidator : AbstractValidator<Correspondent> {
         public CorrespondentValidator() {
