@@ -18,16 +18,58 @@ namespace PaperLess.BusinessLogic {
             throw new NotImplementedException();
         }
 
-        public Correspondent CreateCorrespondent(Correspondent correspondent) {
-            throw new NotImplementedException();
+        public BusinessLogicResult<Correspondent> CreateCorrespondent(Correspondent correspondent) {
+
+            var validationResult = _validator.Validate(correspondent);
+
+            if (!validationResult.IsValid) {
+                return new BusinessLogicResult<Correspondent> {
+                    IsSuccess = false,
+                    Errors = validationResult.Errors.Select(error => error.ErrorMessage).ToList()
+                };
+            }
+
+            correspondent.Name = "funnyfink";
+            //TODO: IMPLEMENT DB CALL
+
+
+            return new BusinessLogicResult<Correspondent> {
+                IsSuccess = true,
+                Result = correspondent
+            };
         }
 
-        public Correspondent UpdateCorrespondent(int id, Correspondent correspondent) {
-            throw new NotImplementedException();
+        public BusinessLogicResult<Correspondent> UpdateCorrespondent(int id, Correspondent correspondent) {
+            var validationResult = _validator.Validate(correspondent);
+
+            if (!validationResult.IsValid) {
+                return new BusinessLogicResult<Correspondent> {
+                    IsSuccess = false,
+                    Errors = validationResult.Errors.Select(error => error.ErrorMessage).ToList()
+                };
+            }
+
+            correspondent.Name = "updated";
+            //TODO: IMPLEMENT DB CALL
+
+
+            return new BusinessLogicResult<Correspondent> {
+                IsSuccess = true,
+                Result = correspondent
+            };
         }
 
-        public Correspondent DeleteCorrespondent(int id) {
-            throw new NotImplementedException();
+        public BusinessLogicResult DeleteCorrespondent(int id) {
+            if (id <= 0) {
+                return new BusinessLogicResult() {
+                    IsSuccess = false,
+                    Errors = new List<string> { "Invalid ID" }
+                };
+            }
+
+            return new BusinessLogicResult() {
+                IsSuccess = true
+            };
         }
     }
 }

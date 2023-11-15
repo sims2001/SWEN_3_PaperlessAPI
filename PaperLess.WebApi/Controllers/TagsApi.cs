@@ -40,16 +40,15 @@ namespace PaperLess.WebApi.Controllers
         [SwaggerOperation("CreateTag")]
         [SwaggerResponse(statusCode: 200, type: typeof(CreateTag200Response), description: "Success")]
         public virtual IActionResult CreateTag([FromBody]CreateTagRequest createTagRequest) {
-            
-            Tag newTag = _mapper.Map<Tag>(createTagRequest);
+            var newTag = _mapper.Map<Tag>(createTagRequest);
 
-            BusinessLogicResult<Tag> result = _logic.NewTag(newTag);
+            var result = _logic.NewTag(newTag);
 
             if (!result.IsSuccess)
                 return BadRequest(new { errors = result.Errors } ); 
 
-            CreateTag200Response response = _mapper.Map<CreateTag200Response>(result.Result);
-            return new ObjectResult(response);
+            var response = _mapper.Map<CreateTag200Response>(result.Result);
+            return new ObjectResult(response) { StatusCode = 200 };
         }
 
         /// <summary>
@@ -60,10 +59,13 @@ namespace PaperLess.WebApi.Controllers
         [HttpDelete]
         [Route("/api/tags/{id}/")]
         [SwaggerOperation("DeleteTag")]
+        [SwaggerResponse(statusCode: 204, description: "Success")]
         public virtual IActionResult DeleteTag([FromRoute (Name = "id")][Required]int id)
         {
+            var result = _logic.DeleteTag(id);
 
-            _logic.DeleteTag(id);
+            if (!result.IsSuccess)
+                return BadRequest(new { errors = result.Errors });
 
             return StatusCode(204);
         }
@@ -116,7 +118,7 @@ namespace PaperLess.WebApi.Controllers
                 return BadRequest(new { errors = result.Errors });
 
             UpdateTag200Response response = _mapper.Map<UpdateTag200Response>(result.Result);
-            return new ObjectResult(response);
+            return new ObjectResult(response) { StatusCode = 200 };
         }
     }
 }

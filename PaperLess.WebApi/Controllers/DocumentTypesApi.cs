@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Newtonsoft.Json;
+using PaperLess.BusinessLogic.Entities;
 using PaperLess.BusinessLogic.Interfaces;
 using PaperLess.WebApi.Attributes;
 using PaperLess.WebApi.Models;
@@ -36,22 +37,19 @@ namespace PaperLess.WebApi.Controllers
         [HttpPost]
         [Route("/api/document_types/")]
         [Consumes("application/json")]
-        [ValidateModelState]
         [SwaggerOperation("CreateDocumentType")]
         [SwaggerResponse(statusCode: 200, type: typeof(CreateDocumentType200Response), description: "Success")]
         public virtual IActionResult CreateDocumentType([FromBody]CreateCorrespondentRequest createCorrespondentRequest)
         {
+            var newDocType = _mapper.Map<DocumentType>(createCorrespondentRequest);
 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(CreateDocumentType200Response));
-            string exampleJson = null;
-            exampleJson = "{\n  \"owner\" : 1,\n  \"matching_algorithm\" : 6,\n  \"user_can_change\" : true,\n  \"is_insensitive\" : true,\n  \"name\" : \"name\",\n  \"match\" : \"match\",\n  \"id\" : 0,\n  \"slug\" : \"slug\"\n}";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<CreateDocumentType200Response>(exampleJson)
-            : default(CreateDocumentType200Response);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
+            var result = _logic.CreateDocumentType(newDocType);
+
+            if (!result.IsSuccess)
+                return BadRequest(new { errors = result.Errors });
+
+            var response = _mapper.Map<CreateTag200Response>(result.Result);
+            return new ObjectResult(response) {  StatusCode = 200};
         }
 
         /// <summary>
@@ -61,15 +59,16 @@ namespace PaperLess.WebApi.Controllers
         /// <response code="204">Success</response>
         [HttpDelete]
         [Route("/api/document_types/{id}/")]
-        [ValidateModelState]
         [SwaggerOperation("DeleteDocumentType")]
+        [SwaggerResponse(statusCode: 204, description: "Success")]
         public virtual IActionResult DeleteDocumentType([FromRoute (Name = "id")][Required]int id)
         {
+            var result = _logic.DeleteDocumentType(id);
 
-            //TODO: Uncomment the next line to return response 204 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+            if (!result.IsSuccess)
+                return BadRequest(new { errors = result.Errors });
+
             return StatusCode(204);
-
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -80,7 +79,6 @@ namespace PaperLess.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet]
         [Route("/api/document_types/")]
-        [ValidateModelState]
         [SwaggerOperation("GetDocumentTypes")]
         [SwaggerResponse(statusCode: 200, type: typeof(GetDocumentTypes200Response), description: "Success")]
         public virtual IActionResult GetDocumentTypes([FromQuery (Name = "page")]int? page, [FromQuery (Name = "full_perms")]bool? fullPerms)
@@ -107,22 +105,19 @@ namespace PaperLess.WebApi.Controllers
         [HttpPut]
         [Route("/api/document_types/{id}/")]
         [Consumes("application/json")]
-        [ValidateModelState]
         [SwaggerOperation("UpdateDocumentType")]
         [SwaggerResponse(statusCode: 200, type: typeof(UpdateDocumentType200Response), description: "Success")]
         public virtual IActionResult UpdateDocumentType([FromRoute (Name = "id")][Required]int id, [FromBody]UpdateDocumentTypeRequest updateDocumentTypeRequest)
         {
+            var updateDocType = _mapper.Map<DocumentType>(updateDocumentTypeRequest);
 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(UpdateDocumentType200Response));
-            string exampleJson = null;
-            exampleJson = "{\n  \"owner\" : 5,\n  \"matching_algorithm\" : 6,\n  \"user_can_change\" : true,\n  \"document_count\" : 1,\n  \"is_insensitive\" : true,\n  \"name\" : \"name\",\n  \"match\" : \"match\",\n  \"id\" : 0,\n  \"slug\" : \"slug\"\n}";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<UpdateDocumentType200Response>(exampleJson)
-            : default(UpdateDocumentType200Response);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
+            var result = _logic.UpdateDocumentType(id, updateDocType);
+
+            if (!result.IsSuccess)
+                return BadRequest(new { errors = result.Errors });
+
+            var response = _mapper.Map<CreateTag200Response>(result.Result);
+            return new ObjectResult(response) { StatusCode = 200 };
         }
     }
 }

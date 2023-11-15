@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Http;
 using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Newtonsoft.Json;
+using PaperLess.BusinessLogic.Entities;
 using PaperLess.BusinessLogic.Interfaces;
 using PaperLess.WebApi.Attributes;
 using PaperLess.WebApi.Models;
-
 namespace PaperLess.WebApi.Controllers
-{ 
+{
     /// <summary>
     /// 
     /// </summary>
@@ -36,22 +36,19 @@ namespace PaperLess.WebApi.Controllers
         [HttpPost]
         [Route("/api/correspondents/")]
         [Consumes("application/json")]
-        [ValidateModelState]
         [SwaggerOperation("CreateCorrespondent")]
         [SwaggerResponse(statusCode: 200, type: typeof(CreateCorrespondentRequest), description: "Success")]
         public virtual IActionResult CreateCorrespondent([FromBody]CreateCorrespondentRequest createCorrespondentRequest)
         {
+            var newCorrespondent = _mapper.Map<Correspondent>(createCorrespondentRequest);
 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(CreateCorrespondentRequest));
-            string exampleJson = null;
-            exampleJson = "{\n  \"owner\" : 6,\n  \"matching_algorithm\" : 0,\n  \"is_insensitive\" : true,\n  \"name\" : \"name\",\n  \"match\" : \"match\"\n}";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<CreateCorrespondentRequest>(exampleJson)
-            : default(CreateCorrespondentRequest);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
+            var result = _logic.CreateCorrespondent(newCorrespondent);
+
+            if (!result.IsSuccess)
+                return BadRequest(new { errors = result.Errors });
+
+            var response = _mapper.Map<CreateCorrespondentRequest>(result.Result);
+            return new ObjectResult(response) { StatusCode = 200 };
         }
 
         /// <summary>
@@ -61,15 +58,15 @@ namespace PaperLess.WebApi.Controllers
         /// <response code="204">Success</response>
         [HttpDelete]
         [Route("/api/correspondents/{id}/")]
-        [ValidateModelState]
-        [SwaggerOperation("DeleteCorrespondent")]
+        [SwaggerResponse(statusCode: 204, description: "Success")]
         public virtual IActionResult DeleteCorrespondent([FromRoute (Name = "id")][Required]int id)
         {
+            var result = _logic.DeleteCorrespondent(id);
 
-            //TODO: Uncomment the next line to return response 204 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+            if (!result.IsSuccess)
+                return BadRequest(new { errors = result.Errors });
+
             return StatusCode(204);
-
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -80,7 +77,6 @@ namespace PaperLess.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpGet]
         [Route("/api/correspondents/")]
-        [ValidateModelState]
         [SwaggerOperation("GetCorrespondents")]
         [SwaggerResponse(statusCode: 200, type: typeof(GetCorrespondents200Response), description: "Success")]
         public virtual IActionResult GetCorrespondents([FromQuery (Name = "page")]int? page, [FromQuery (Name = "full_perms")]bool? fullPerms)
@@ -107,22 +103,19 @@ namespace PaperLess.WebApi.Controllers
         [HttpPut]
         [Route("/api/correspondents/{id}/")]
         [Consumes("application/json")]
-        [ValidateModelState]
         [SwaggerOperation("UpdateCorrespondent")]
         [SwaggerResponse(statusCode: 200, type: typeof(UpdateCorrespondent200Response), description: "Success")]
         public virtual IActionResult UpdateCorrespondent([FromRoute (Name = "id")][Required]int id, [FromBody]UpdateCorrespondentRequest updateCorrespondentRequest)
         {
+            var updateCorrespondent = _mapper.Map<Correspondent>(updateCorrespondentRequest);
 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(UpdateCorrespondent200Response));
-            string exampleJson = null;
-            exampleJson = "{\n  \"owner\" : 5,\n  \"matching_algorithm\" : 6,\n  \"user_can_change\" : true,\n  \"document_count\" : 1,\n  \"is_insensitive\" : true,\n  \"name\" : \"name\",\n  \"match\" : \"match\",\n  \"id\" : 0,\n  \"last_correspondence\" : 5,\n  \"slug\" : \"slug\"\n}";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<UpdateCorrespondent200Response>(exampleJson)
-            : default(UpdateCorrespondent200Response);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
+            var result = _logic.UpdateCorrespondent(id, updateCorrespondent);
+
+            if (!result.IsSuccess)
+                return BadRequest(new { errors = result.Errors });
+
+            var response = _mapper.Map<UpdateCorrespondent200Response>(result.Result);
+            return new ObjectResult(response) { StatusCode = 200 };
         }
     }
 }

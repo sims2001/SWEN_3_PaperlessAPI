@@ -6,7 +6,7 @@ namespace PaperLess.BusinessLogic.Interfaces {
         public List<Tag> GetTags(int? page, bool? fullPerms);
         public BusinessLogicResult<Tag> NewTag(Tag tag);
         public BusinessLogicResult<Tag> UpdateTag(int id, Tag tag);
-        public void DeleteTag(int id);
+        public BusinessLogicResult DeleteTag(int id);
     }
 
 }

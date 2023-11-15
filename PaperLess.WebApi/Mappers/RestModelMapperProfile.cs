@@ -10,12 +10,13 @@ public class RestModelMapperProfile : Profile {
         CreateMap<Correspondent, NewCorrespondentDTO>().ReverseMap();
         CreateMap<Correspondent, CreateCorrespondentRequest>().ReverseMap();
         CreateMap<Correspondent, UpdateCorrespondentRequest>().ReverseMap();
+
+        //TODO: CHECK THOSE -> Maybe map slug from ID+Name?
         CreateMap<Correspondent, GetCorrespondents200Response>().ReverseMap();
         CreateMap<Correspondent, GetCorrespondents200ResponseResultsInner>().ReverseMap();
         CreateMap<Correspondent, GetCorrespondents200ResponseResultsInnerPermissions>().ReverseMap();
         CreateMap<Correspondent, GetCorrespondents200ResponseResultsInnerPermissionsView>().ReverseMap();
         CreateMap<Correspondent, UpdateCorrespondent200Response>().ReverseMap();
-        CreateMap<Correspondent, UpdateCorrespondentRequest>().ReverseMap();
         CreateMap<Correspondent, UpdateCorrespondentRequestPermissionsForm>().ReverseMap();
 
         CreateMap<Document, DocumentDTO>().ReverseMap();

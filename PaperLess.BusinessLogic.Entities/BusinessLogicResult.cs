@@ -14,4 +14,13 @@ namespace PaperLess.BusinessLogic.Entities {
             Errors = new List<string>();
         }
     }
+
+    public class BusinessLogicResult {
+        public bool IsSuccess { get; set; }
+        public List<string> Errors { get; set; }
+
+        public BusinessLogicResult() {
+            Errors = new List<string>();
+        }
+    }
 }

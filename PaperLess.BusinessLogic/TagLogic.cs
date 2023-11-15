@@ -21,7 +21,7 @@ namespace PaperLess.BusinessLogic {
 
         public BusinessLogicResult<Tag> NewTag(Tag tag) {
 
-            ValidationResult validationResult = _validator.Validate(tag);
+            var validationResult = _validator.Validate(tag);
 
             if (!validationResult.IsValid) {
                 return new BusinessLogicResult<Tag> {
@@ -61,10 +61,17 @@ namespace PaperLess.BusinessLogic {
             };
         }
 
-        public void DeleteTag(int id) {
+        public BusinessLogicResult DeleteTag(int id) {
+            if (id <= 0) {
+                return new BusinessLogicResult() {
+                    IsSuccess = false,
+                    Errors = new List<string> { "Invalid ID" }
+                };
+            }
 
-            //_dbService
-            throw new NotImplementedException();
+            return new BusinessLogicResult() {
+                IsSuccess = true
+            };
         }
     }
 
