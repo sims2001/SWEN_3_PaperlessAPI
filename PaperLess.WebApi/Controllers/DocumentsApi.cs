@@ -300,18 +300,18 @@ namespace PaperLess.WebApi.Controllers
         [SwaggerOperation("UploadDocument")]
         public virtual async Task<IActionResult> UploadDocument([FromForm] CreateDocumentRequest newDocumentRequest) {
 
+            var newDocument = _mapper.Map<Document>(newDocumentRequest);
+            
             using (var streamReader = new StreamReader(newDocumentRequest.Document.OpenReadStream())) {
-                var documentContent = await streamReader.ReadToEndAsync();
-
-                // Perform actions with the document content (e.g., save to a database)
-
-                // Optionally, you can return a response with the processed data
-                return Ok(new {
-                    DocTitle = newDocumentRequest.Title,
-                    DocumentContent = documentContent
-                });
+                newDocument.Content = await streamReader.ReadToEndAsync();
             }
             
+            var result = _logic.CreateDocument(newDocument);
+
+            if (!result.IsSuccess)
+                return BadRequest(new { errors = result.Errors });
+
+            return Ok();
         }
     }
 }

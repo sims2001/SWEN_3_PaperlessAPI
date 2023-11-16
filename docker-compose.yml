@@ -44,6 +44,21 @@ services:
     depends_on:
       - paperless-webapi
 
+  paperless-db-admin:
+    container_name: paperless-db-admin
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: paperless@example.com
+      PGADMIN_DEFAULT_PASSWORD: paperless
+    depends_on:
+      - paperless-db
+    networks:
+      - paperless-network
+
+
 networks:
   paperless-network:
     driver: bridge
