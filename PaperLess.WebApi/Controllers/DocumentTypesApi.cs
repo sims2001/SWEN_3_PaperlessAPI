@@ -24,9 +24,10 @@ namespace PaperLess.WebApi.Controllers
         private readonly IMapper _mapper;
         private readonly IDocumentTypeLogic _logic;
 
-        public DocumentTypesApiController(IDocumentTypeLogic logic, IMapper mapper) {
-            _logic = logic;
-            _mapper = mapper;
+        public DocumentTypesApiController(IDocumentTypeLogic logic, IMapper mapper)
+        {
+            _logic = logic ?? throw new ArgumentNullException(nameof(_logic));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(_mapper));
         }
 
         /// <summary>

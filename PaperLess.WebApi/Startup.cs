@@ -30,6 +30,8 @@ using PaperLess.WebApi.OpenApi;
 using PaperLess.WebApi.Filters;
 using PaperLess.WebApi.Formatters;
 using PaperLess.WebApi.Mappers;
+using PaperLess.DataAccess.SQL;
+using Microsoft.EntityFrameworkCore;
 
 namespace PaperLess.WebApi
 {
@@ -71,6 +73,9 @@ namespace PaperLess.WebApi
             services.AddScoped<IDocumentLogic, DocumentLogic>();
             services.AddScoped<IDocumentTypeLogic, DocumentTypeLogic>();
             services.AddScoped<ICorrespondentLogic, CorrespondentLogic>();
+
+            services.AddDbContext<PaperLessDbContext>(options => 
+                options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection")));
 
             // Add framework services.
             services

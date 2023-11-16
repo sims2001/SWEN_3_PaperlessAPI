@@ -11,7 +11,7 @@ namespace PaperLess.BusinessLogic {
         private readonly IValidator<Tag> _validator;
 
         public TagLogic(IValidator<Tag> validator) {
-            _validator = validator;
+            _validator = validator ?? throw new ArgumentNullException(nameof(_validator));
         }
 
 

@@ -23,9 +23,10 @@ namespace PaperLess.WebApi.Controllers
         private readonly IMapper _mapper;
         private readonly ICorrespondentLogic _logic;
 
-        public CorrespondentsApiController(ICorrespondentLogic logic, IMapper mapper) {
-            _logic = logic;
-            _mapper = mapper;
+        public CorrespondentsApiController(ICorrespondentLogic logic, IMapper mapper)
+        {
+            _logic = logic ?? throw new ArgumentNullException(nameof(_logic));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(_mapper));
         }
 
         /// <summary>

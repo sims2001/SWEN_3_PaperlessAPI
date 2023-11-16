@@ -11,6 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperLess.BusinessLogic.Int
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperLess.BusinessLogic", "PaperLess.BusinessLogic\PaperLess.BusinessLogic.csproj", "{4902942A-1772-4CC0-B8D2-0E7E05DA3302}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperLess.DataAccess.Entities", "PaperLess.DataAccess.Entities\PaperLess.DataAccess.Entities.csproj", "{737AC849-BEE3-4798-9BEF-243FACD39F71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperLess.DataAccess.Interfaces", "PaperLess.DataAccess.Interfaces\PaperLess.DataAccess.Interfaces.csproj", "{D0E0ED63-4D53-4F2B-99A1-63A1C3C53A86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperLess.DataAccess.SQL", "PaperLess.DataAccess.SQL\PaperLess.DataAccess.SQL.csproj", "{E8369F42-A225-44BF-8ABF-2F65350934D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +39,18 @@ Global
 		{4902942A-1772-4CC0-B8D2-0E7E05DA3302}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4902942A-1772-4CC0-B8D2-0E7E05DA3302}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4902942A-1772-4CC0-B8D2-0E7E05DA3302}.Release|Any CPU.Build.0 = Release|Any CPU
+		{737AC849-BEE3-4798-9BEF-243FACD39F71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{737AC849-BEE3-4798-9BEF-243FACD39F71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{737AC849-BEE3-4798-9BEF-243FACD39F71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{737AC849-BEE3-4798-9BEF-243FACD39F71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0E0ED63-4D53-4F2B-99A1-63A1C3C53A86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0E0ED63-4D53-4F2B-99A1-63A1C3C53A86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0E0ED63-4D53-4F2B-99A1-63A1C3C53A86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0E0ED63-4D53-4F2B-99A1-63A1C3C53A86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8369F42-A225-44BF-8ABF-2F65350934D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8369F42-A225-44BF-8ABF-2F65350934D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8369F42-A225-44BF-8ABF-2F65350934D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8369F42-A225-44BF-8ABF-2F65350934D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

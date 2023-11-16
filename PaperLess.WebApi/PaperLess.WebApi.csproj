@@ -27,5 +27,6 @@
     <ProjectReference Include="..\PaperLess.BusinessLogic.Entities\PaperLess.BusinessLogic.Entities.csproj" />
     <ProjectReference Include="..\PaperLess.BusinessLogic.Interfaces\PaperLess.BusinessLogic.Interfaces.csproj" />
     <ProjectReference Include="..\PaperLess.BusinessLogic\PaperLess.BusinessLogic.csproj" />
+    <ProjectReference Include="..\PaperLess.DataAccess.SQL\PaperLess.DataAccess.SQL.csproj" />
   </ItemGroup>
 </Project>

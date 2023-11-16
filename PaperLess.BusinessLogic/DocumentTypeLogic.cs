@@ -9,7 +9,7 @@ namespace PaperLess.BusinessLogic {
 
         private readonly IValidator<DocumentType> _validator;
         public DocumentTypeLogic(IValidator<DocumentType> validator) {
-            _validator = validator;
+            _validator = validator ?? throw new ArgumentNullException(nameof(_validator));
         }
         public List<DocumentType> GetDocumentTypes(int? page, bool? fullPerms) {
             throw new NotImplementedException();

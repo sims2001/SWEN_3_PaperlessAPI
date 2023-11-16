@@ -11,7 +11,7 @@ namespace PaperLess.BusinessLogic {
     public class CorrespondentLogic : ICorrespondentLogic {
         private readonly IValidator<Correspondent> _validator;
         public CorrespondentLogic(IValidator<Correspondent> validator) {
-            _validator = validator;
+            _validator = validator ?? throw new ArgumentNullException(nameof(_validator));
         }
 
         public List<Correspondent> GetCorrespondents(int? page, bool? fullPerms) {

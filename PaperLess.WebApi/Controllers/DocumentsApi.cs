@@ -29,8 +29,8 @@ namespace PaperLess.WebApi.Controllers
         /// <param name="logic"></param>
         /// <param name="mapper"></param>
         public DocumentsApiController(IDocumentLogic logic, IMapper mapper) {
-            _logic = logic;
-            _mapper = mapper;
+            _logic = logic ?? throw new ArgumentNullException(nameof(_logic));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(_mapper));
         }
 
 

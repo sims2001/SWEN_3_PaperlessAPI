@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PaperLess.DataAccess.Entities\PaperLess.DataAccess.Entities.csproj" />
+    <ProjectReference Include="..\PaperLess.DataAccess.Interfaces\PaperLess.DataAccess.Interfaces.csproj" />
+    <ProjectReference Include="..\PaperLess.BusinessLogic.Entities\PaperLess.BusinessLogic.Entities.csproj" />
+  </ItemGroup>
+</Project>

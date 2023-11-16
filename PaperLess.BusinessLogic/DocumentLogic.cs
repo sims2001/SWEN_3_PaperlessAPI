@@ -10,7 +10,7 @@ namespace PaperLess.BusinessLogic {
         private readonly IValidator<Document> _validator;
 
         public DocumentLogic(IValidator<Document> validator) {
-            _validator = validator;
+            _validator = validator ?? throw new ArgumentNullException(nameof(_validator));
         }
         public List<Document> GetDocuments(int? page, int? pageSize, string query, string ordering, List<int> tagsIdAll, int? documentTypeId,
             int? storagePathIdIn, int? correspondentId, bool? truncateContent) {
