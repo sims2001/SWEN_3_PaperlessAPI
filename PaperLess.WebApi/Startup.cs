@@ -67,17 +67,17 @@ namespace PaperLess.WebApi
         {
             services.AddCors();
 
-            services.AddAutoMapper(typeof(RestModelMapperProfile), typeof(DalModelMapperProfile));
+            services.AddAutoMapper(typeof(ImportantRequestMapperProfile), typeof(DalModelMapperProfile), typeof(RestModelMapperProfile));
             //services.AddAutoMapper(typeof(DalModelMapperProfile));
 
-            services.AddScoped<IMapper>(sp => {
+            /* services.AddScoped<IMapper>(sp => {
                 var profiles = sp.GetServices<Profile>();
                 return new MapperConfiguration(cfg => {
                     foreach(var profile in profiles){
                         cfg.AddProfile(profile);
                     }
                 }).CreateMapper();
-            });
+            }); */
 
             services.AddLogging(builder => {
                 builder.AddConsole();

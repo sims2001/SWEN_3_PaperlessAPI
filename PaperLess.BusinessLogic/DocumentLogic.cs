@@ -24,6 +24,7 @@ namespace PaperLess.BusinessLogic {
         }
 
         public BusinessLogicResult CreateDocument(Document document) {
+
             var validationResult = _validator.Validate(document);
 
             if (!validationResult.IsValid) {
@@ -33,8 +34,7 @@ namespace PaperLess.BusinessLogic {
                 };
             }
 
-            //TODO: IMPLEMENT DB CALL
-
+            _repository.AddDocument(document);
 
             return new BusinessLogicResult {
                 IsSuccess = true,

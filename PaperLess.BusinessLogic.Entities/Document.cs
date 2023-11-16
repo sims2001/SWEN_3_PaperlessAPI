@@ -8,7 +8,7 @@
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Correspondent
@@ -28,51 +28,51 @@
         /// <summary>
         /// Gets or Sets Title
         /// </summary>
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         /// <summary>
         /// Gets or Sets Content
         /// </summary>
-        public string Content { get; set; }
+        public string? Content { get; set; }
 
         /// <summary>
         /// Gets or Sets Tags
         /// </summary>
-        public List<int> Tags { get; set; }
+        public List<int>? Tags { get; set; }
 
         /// <summary>
         /// Gets or Sets Created
         /// </summary>
-        public DateTime Created { get; set; }
+        public DateTime? Created { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedDate
         /// </summary>
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         /// <summary>
         /// Gets or Sets Modified
         /// </summary>
-        public DateTime Modified { get; set; }
+        public DateTime? Modified { get; set; }
 
         /// <summary>
         /// Gets or Sets Added
         /// </summary>
-        public DateTime Added { get; set; }
+        public DateTime? Added { get; set; }
 
         /// <summary>
         /// Gets or Sets ArchiveSerialNumber
         /// </summary>
-        public string ArchiveSerialNumber { get; set; }
+        public string? ArchiveSerialNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets OriginalFileName
         /// </summary>
-        public string OriginalFileName { get; set; }
+        public string? OriginalFileName { get; set; }
 
         /// <summary>
         /// Gets or Sets ArchivedFileName
         /// </summary>
-        public string ArchivedFileName { get; set; }
+        public string? ArchivedFileName { get; set; }
     }
 }
