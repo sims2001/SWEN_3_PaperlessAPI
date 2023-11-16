@@ -17,7 +17,7 @@ services:
       - paperless-network
 
   paperless-webapi:
-    container_name: paperless-webapi
+    container_name: sims2001/paperless-webapi
     image: paperless-webapi
     restart: always
     environment:
