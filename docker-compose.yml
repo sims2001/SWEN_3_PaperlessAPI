@@ -18,7 +18,7 @@ services:
 
   paperless-webapi:
     container_name: paperless-webapi
-    image: paperless-webapi
+    image: sims2001/paperless-webapi:master
     restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
