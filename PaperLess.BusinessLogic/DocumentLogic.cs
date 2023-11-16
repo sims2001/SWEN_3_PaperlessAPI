@@ -4,16 +4,18 @@ using System.Xml.Linq;
 using FluentValidation;
 using PaperLess.BusinessLogic.Validation;
 using Microsoft.Extensions.Logging;
+using PaperLess.DataAccess.Interfaces;
 
 namespace PaperLess.BusinessLogic {
 
     public class DocumentLogic : IDocumentLogic {
         private readonly IValidator<Document> _validator;
-        
+        private readonly IDocumentRepository _repository;
         private readonly ILogger<DocumentLogic> _logger;
 
-        public DocumentLogic(IValidator<Document> validator, ILogger<DocumentLogic> logger) {
+        public DocumentLogic(IValidator<Document> validator, IDocumentRepository repository, ILogger<DocumentLogic> logger) {
             _validator = validator ?? throw new ArgumentNullException(nameof(_validator));
+            _repository = repository ?? throw new ArgumentNullException(nameof(_repository));
             _logger = logger ?? throw new ArgumentNullException(nameof(_logger));
         }
         public List<Document> GetDocuments(int? page, int? pageSize, string query, string ordering, List<int> tagsIdAll, int? documentTypeId,

@@ -14,8 +14,9 @@ using PaperLess.BusinessLogic;
 using PaperLess.BusinessLogic.Entities;
 using PaperLess.BusinessLogic.Interfaces;
 using PaperLess.WebApi.Attributes;
-using PaperLess.WebApi.Models;
 using Microsoft.Extensions.Logging;
+using PaperLess.WebApi.Entities;
+
 namespace PaperLess.WebApi.Controllers
 {
     /// <summary>

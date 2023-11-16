@@ -1,5 +1,5 @@
 using AutoMapper;
-using PaperLess.WebApi.Models;
+using PaperLess.WebApi.Entities;
 
 namespace PaperLess.BusinessLogic.Entities.Mappers;
 

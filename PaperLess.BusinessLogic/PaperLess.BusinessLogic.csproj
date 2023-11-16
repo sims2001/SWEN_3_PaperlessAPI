@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PaperLess.BusinessLogic.Entities\PaperLess.BusinessLogic.Entities.csproj" />
     <ProjectReference Include="..\PaperLess.BusinessLogic.Interfaces\PaperLess.BusinessLogic.Interfaces.csproj" />
+    <ProjectReference Include="..\PaperLess.DataAccess.Interfaces\PaperLess.DataAccess.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

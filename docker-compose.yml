@@ -1,15 +1,29 @@
 version: '3.4'
 
 services:
+  paperless-db:
+    image: postgres:latest
+    container_name: paperless-db
+    environment:
+      POSTGRES_DB: paperless
+      POSTGRES_USER: paperless
+      POSTGRES_PASSWORD: paperless
+    ports:
+      - "5432:5432"
+    networks:
+      - paperless-network
+
   paperless-webapi:
     image: sims2001/paperless-webapi
     container_name: paperless-webapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    depends_on:
+      - paperless-db
     ports:
       - 8081:8081
     networks:
       - paperless-network
-    depends_on:
-      - paperless-frontend
 
   paperless-frontend:
     image: nginx:latest
@@ -22,6 +36,8 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     networks:
       - paperless-network
+    depends_on:
+      - paperless-webapi
 
 networks:
   paperless-network:

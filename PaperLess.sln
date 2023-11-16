@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaperLess.WebApi", "PaperLess.WebApi\PaperLess.WebApi.csproj", "{30F1797B-E402-4147-800B-999AF8A8A686}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperLess.BusinessLogic.Entities", "PaperLess.BusinessLogic.Entities\PaperLess.BusinessLogic.Entities.csproj", "{E932EB11-4197-4282-A555-52494085D400}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperLess.BusinessLogic.Interfaces", "PaperLess.BusinessLogic.Interfaces\PaperLess.BusinessLogic.Interfaces.csproj", "{E1EDC049-E57F-430B-AE2A-B90168D7E7B5}"
@@ -17,16 +15,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperLess.DataAccess.Interf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperLess.DataAccess.SQL", "PaperLess.DataAccess.SQL\PaperLess.DataAccess.SQL.csproj", "{E8369F42-A225-44BF-8ABF-2F65350934D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperLess.WebApi.Entities", "PaperLess.WebApi.Entities\PaperLess.WebApi.Entities.csproj", "{1B82BC0C-2F56-40AC-A072-0DA1F7345768}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperLess.WebApi", "PaperLess.WebApi\PaperLess.WebApi.csproj", "{05853932-9B6A-412B-A002-FE3A5F0B9BB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{30F1797B-E402-4147-800B-999AF8A8A686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{30F1797B-E402-4147-800B-999AF8A8A686}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{30F1797B-E402-4147-800B-999AF8A8A686}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{30F1797B-E402-4147-800B-999AF8A8A686}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E932EB11-4197-4282-A555-52494085D400}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E932EB11-4197-4282-A555-52494085D400}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E932EB11-4197-4282-A555-52494085D400}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +49,14 @@ Global
 		{E8369F42-A225-44BF-8ABF-2F65350934D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8369F42-A225-44BF-8ABF-2F65350934D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8369F42-A225-44BF-8ABF-2F65350934D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B82BC0C-2F56-40AC-A072-0DA1F7345768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B82BC0C-2F56-40AC-A072-0DA1F7345768}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B82BC0C-2F56-40AC-A072-0DA1F7345768}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B82BC0C-2F56-40AC-A072-0DA1F7345768}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05853932-9B6A-412B-A002-FE3A5F0B9BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05853932-9B6A-412B-A002-FE3A5F0B9BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05853932-9B6A-412B-A002-FE3A5F0B9BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05853932-9B6A-412B-A002-FE3A5F0B9BB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

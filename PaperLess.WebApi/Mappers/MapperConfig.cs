@@ -1,10 +1,10 @@
 ﻿using PaperLess.BusinessLogic.Entities;
-using PaperLess.WebApi.Models;
+using PaperLess.WebApi.Entities;
 
 namespace PaperLess.WebApi.Mappers
 {
     using AutoMapper;
-    using WebApi.Models;
+    using WebApi.Entities;
     using BusinessLogic.Entities;
 
     /// <summary>

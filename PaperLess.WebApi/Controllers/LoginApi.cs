@@ -9,7 +9,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using Newtonsoft.Json;
 using PaperLess.WebApi.Mappers;
 using PaperLess.WebApi.Attributes;
-using PaperLess.WebApi.Models;
+using PaperLess.WebApi.Entities;
 
 namespace PaperLess.WebApi.Controllers
 { 

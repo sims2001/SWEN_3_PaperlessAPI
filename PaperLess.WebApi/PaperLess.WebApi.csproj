@@ -4,6 +4,8 @@
     <Copyright>No Copyright</Copyright>
     <Authors>OpenAPI</Authors>
     <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <Warnings>nullable</Warnings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <Version>1.0.0</Version>
@@ -24,8 +26,6 @@
     <PackageReference Include="JsonSubTypes" Version="1.8.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PaperLess.BusinessLogic.Entities\PaperLess.BusinessLogic.Entities.csproj" />
-    <ProjectReference Include="..\PaperLess.BusinessLogic.Interfaces\PaperLess.BusinessLogic.Interfaces.csproj" />
     <ProjectReference Include="..\PaperLess.BusinessLogic\PaperLess.BusinessLogic.csproj" />
     <ProjectReference Include="..\PaperLess.DataAccess.SQL\PaperLess.DataAccess.SQL.csproj" />
   </ItemGroup>

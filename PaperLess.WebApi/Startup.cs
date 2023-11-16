@@ -30,11 +30,13 @@ using PaperLess.WebApi.OpenApi;
 using PaperLess.WebApi.Filters;
 using PaperLess.WebApi.Formatters;
 using PaperLess.WebApi.Mappers;
-using PaperLess.DataAccess.SQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PaperLess.BusinessLogic.Entities.Mappers;
 using AutoMapper;
+using PaperLess.DataAccess.Interfaces;
+using PaperLess.DataAccess.SQL;
+using PaperLess.DataAccess.SQL.PostgresRepositories;
 
 namespace PaperLess.WebApi
 {
@@ -81,18 +83,23 @@ namespace PaperLess.WebApi
                 builder.AddConsole();
             });
 
+            services.AddDbContext<PaperLessDbContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection")));
+
             services.AddScoped<IValidator<Tag>, TagValidator>();
             services.AddScoped<IValidator<Correspondent>, CorrespondentValidator>();
             services.AddScoped<IValidator<Document>, DocumentValidator>();
             services.AddScoped<IValidator<DocumentType>, DocumentTypeValidator>();
 
+            services.AddScoped<IDocumentRepository, DocumentRepository>();
+            services.AddScoped<IDocumentTypeRepository, DocumentTypeRepository>();
+            services.AddScoped<ITagRepository, TagRepository>();
+            services.AddScoped<ICorrespondentRepository, CorrespondentRepository>();
+
             services.AddScoped<ITagLogic, TagLogic>();
             services.AddScoped<IDocumentLogic, DocumentLogic>();
             services.AddScoped<IDocumentTypeLogic, DocumentTypeLogic>();
             services.AddScoped<ICorrespondentLogic, CorrespondentLogic>();
-
-            services.AddDbContext<PaperLessDbContext>(options => 
-                options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection")));
 
             // Add framework services.
             services
