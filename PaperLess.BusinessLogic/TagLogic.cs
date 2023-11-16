@@ -3,6 +3,7 @@ using FluentValidation.Results;
 using PaperLess.BusinessLogic.Entities;
 using PaperLess.BusinessLogic.Interfaces;
 using PaperLess.BusinessLogic.Validation;
+using Microsoft.Extensions.Logging;
 
 namespace PaperLess.BusinessLogic {
 
@@ -10,8 +11,11 @@ namespace PaperLess.BusinessLogic {
 
         private readonly IValidator<Tag> _validator;
 
-        public TagLogic(IValidator<Tag> validator) {
+        private readonly ILogger<TagLogic> _logger;
+
+        public TagLogic(IValidator<Tag> validator, ILogger<TagLogic> logger) {
             _validator = validator ?? throw new ArgumentNullException(nameof(_validator));
+            _logger = logger ?? throw new ArgumentNullException(nameof(_logger));
         }
 
 

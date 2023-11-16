@@ -12,6 +12,7 @@ using PaperLess.BusinessLogic.Entities;
 using PaperLess.BusinessLogic.Interfaces;
 using PaperLess.WebApi.Attributes;
 using PaperLess.WebApi.Models;
+using Microsoft.Extensions.Logging;
 namespace PaperLess.WebApi.Controllers
 {
     /// <summary>
@@ -22,11 +23,20 @@ namespace PaperLess.WebApi.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ICorrespondentLogic _logic;
+        private readonly ILogger<CorrespondentsApiController> _logger;
 
-        public CorrespondentsApiController(ICorrespondentLogic logic, IMapper mapper)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logic"></param>
+        /// <param name="mapper"></param>
+        /// <param name="logger"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public CorrespondentsApiController(ICorrespondentLogic logic, IMapper mapper, ILogger<CorrespondentsApiController> logger)
         {
             _logic = logic ?? throw new ArgumentNullException(nameof(_logic));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(_mapper));
+            _logger = logger ?? throw new ArgumentNullException(nameof(_logger));
         }
 
         /// <summary>

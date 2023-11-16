@@ -32,6 +32,9 @@ using PaperLess.WebApi.Formatters;
 using PaperLess.WebApi.Mappers;
 using PaperLess.DataAccess.SQL;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using PaperLess.BusinessLogic.Entities.Mappers;
+using AutoMapper;
 
 namespace PaperLess.WebApi
 {
@@ -62,7 +65,21 @@ namespace PaperLess.WebApi
         {
             services.AddCors();
 
-            services.AddAutoMapper(typeof(RestModelMapperProfile));
+            services.AddAutoMapper(typeof(RestModelMapperProfile), typeof(DalModelMapperProfile));
+            //services.AddAutoMapper(typeof(DalModelMapperProfile));
+
+            services.AddScoped<IMapper>(sp => {
+                var profiles = sp.GetServices<Profile>();
+                return new MapperConfiguration(cfg => {
+                    foreach(var profile in profiles){
+                        cfg.AddProfile(profile);
+                    }
+                }).CreateMapper();
+            });
+
+            services.AddLogging(builder => {
+                builder.AddConsole();
+            });
 
             services.AddScoped<IValidator<Tag>, TagValidator>();
             services.AddScoped<IValidator<Correspondent>, CorrespondentValidator>();

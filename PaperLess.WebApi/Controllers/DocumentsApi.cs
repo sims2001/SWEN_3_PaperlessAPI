@@ -15,6 +15,7 @@ using PaperLess.BusinessLogic.Entities;
 using PaperLess.BusinessLogic.Interfaces;
 using PaperLess.WebApi.Attributes;
 using PaperLess.WebApi.Models;
+using Microsoft.Extensions.Logging;
 namespace PaperLess.WebApi.Controllers
 {
     /// <summary>
@@ -23,14 +24,19 @@ namespace PaperLess.WebApi.Controllers
     public class DocumentsApiController : ControllerBase {
         private readonly IMapper _mapper;
         private readonly IDocumentLogic _logic;
+        private readonly ILogger<DocumentsApiController> _logger;
 
-        /// <summary>
-        /// </summary>
-        /// <param name="logic"></param>
-        /// <param name="mapper"></param>
-        public DocumentsApiController(IDocumentLogic logic, IMapper mapper) {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="logic"></param>
+    /// <param name="mapper"></param>
+    /// <param name="logger"></param>
+    /// <exception cref="ArgumentNullException"></exception>
+        public DocumentsApiController(IDocumentLogic logic, IMapper mapper, ILogger<DocumentsApiController> logger) {
             _logic = logic ?? throw new ArgumentNullException(nameof(_logic));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(_mapper));
+            _logger = logger ?? throw new ArgumentNullException(nameof(_logger));
         }
 
 

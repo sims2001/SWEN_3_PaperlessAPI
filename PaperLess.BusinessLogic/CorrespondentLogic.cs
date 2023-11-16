@@ -4,14 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
+using Microsoft.Extensions.Logging;
 using PaperLess.BusinessLogic.Entities;
 using PaperLess.BusinessLogic.Interfaces;
 
 namespace PaperLess.BusinessLogic {
     public class CorrespondentLogic : ICorrespondentLogic {
         private readonly IValidator<Correspondent> _validator;
-        public CorrespondentLogic(IValidator<Correspondent> validator) {
+
+        private readonly ILogger<CorrespondentLogic> _logger;
+        public CorrespondentLogic(IValidator<Correspondent> validator, ILogger<CorrespondentLogic> logger) {
             _validator = validator ?? throw new ArgumentNullException(nameof(_validator));
+            _logger = logger ?? throw new ArgumentNullException(nameof(_logger));
         }
 
         public List<Correspondent> GetCorrespondents(int? page, bool? fullPerms) {

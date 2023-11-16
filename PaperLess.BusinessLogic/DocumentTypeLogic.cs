@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.Logging;
 using PaperLess.BusinessLogic.Entities;
 using PaperLess.BusinessLogic.Interfaces;
 using PaperLess.BusinessLogic.Validation;
@@ -8,8 +9,11 @@ namespace PaperLess.BusinessLogic {
     public class DocumentTypeLogic : IDocumentTypeLogic {
 
         private readonly IValidator<DocumentType> _validator;
-        public DocumentTypeLogic(IValidator<DocumentType> validator) {
+
+        private readonly ILogger<DocumentTypeLogic> _logger;
+        public DocumentTypeLogic(IValidator<DocumentType> validator, ILogger<DocumentTypeLogic> logger) {
             _validator = validator ?? throw new ArgumentNullException(nameof(_validator));
+            _logger = logger ?? throw new ArgumentNullException(nameof(_logger));
         }
         public List<DocumentType> GetDocumentTypes(int? page, bool? fullPerms) {
             throw new NotImplementedException();

@@ -13,6 +13,7 @@ using PaperLess.BusinessLogic.Interfaces;
 using PaperLess.BusinessLogic.Validation;
 using PaperLess.WebApi.Attributes;
 using PaperLess.WebApi.Models;
+using Microsoft.Extensions.Logging;
 
 namespace PaperLess.WebApi.Controllers
 { 
@@ -23,11 +24,20 @@ namespace PaperLess.WebApi.Controllers
     public class TagsApiController : ControllerBase {
         private readonly IMapper _mapper;
         private readonly ITagLogic _logic;
+        private readonly ILogger<TagsApiController> _logger;
 
-        public TagsApiController(ITagLogic logic, IMapper mapper)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logic"></param>
+        /// <param name="mapper"></param>
+        /// <param name="logger"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public TagsApiController(ITagLogic logic, IMapper mapper, ILogger<TagsApiController> logger)
         {
             _logic = logic ?? throw new ArgumentNullException(nameof(_logic));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(_mapper));
+            _logger = logger ?? throw new ArgumentNullException(nameof(_logger));
         }
 
         /// <summary>
