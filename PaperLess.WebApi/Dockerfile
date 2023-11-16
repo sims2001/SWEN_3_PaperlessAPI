@@ -32,6 +32,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 as runtime
 WORKDIR /app
 
 COPY --from=build /app/PaperLess.WebApi/out ./
-COPY entrypoint.sh .
+#COPY entrypoint.sh .
 
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["dotnet", "PaperLess.WebApi.dll"]

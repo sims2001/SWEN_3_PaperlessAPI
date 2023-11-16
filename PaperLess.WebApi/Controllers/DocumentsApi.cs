@@ -296,7 +296,6 @@ namespace PaperLess.WebApi.Controllers
         /// <response code="200">Success</response>
         [HttpPost]
         [Route("/api/documents/post_document/")]
-        [ValidateModelState]
         [Consumes("multipart/form-data")]
         [SwaggerOperation("UploadDocument")]
         public virtual async Task<IActionResult> UploadDocument([FromForm] CreateDocumentRequest newDocumentRequest) {

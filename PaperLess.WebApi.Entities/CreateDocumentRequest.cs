@@ -27,7 +27,7 @@ namespace PaperLess.WebApi.Entities {
 
         [DataMember(Name = "tags", EmitDefaultValue = true)]
         [FromForm(Name = "tags")]
-        public List<int> Tags { get; set; } 
+        public List<int>? Tags { get; set; } 
 
         [DataMember(Name= "correspondent", EmitDefaultValue = true)]
         [FromForm(Name = "correspondent")]

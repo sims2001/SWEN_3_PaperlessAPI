@@ -2,20 +2,24 @@ version: '3.4'
 
 services:
   paperless-db:
-    image: postgres:latest
     container_name: paperless-db
+    image: postgres:latest
+    restart: always
     environment:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
       POSTGRES_PASSWORD: paperless
     ports:
       - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
     networks:
       - paperless-network
 
   paperless-webapi:
-    image: sims2001/paperless-webapi
     container_name: paperless-webapi
+    image: paperless-webapi
+    restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     depends_on:
@@ -26,8 +30,9 @@ services:
       - paperless-network
 
   paperless-frontend:
-    image: nginx:latest
     container_name: paperless-frontend
+    image: nginx:latest
+    restart: always
     ports:
       - 80:80
       - 443:443
@@ -42,3 +47,6 @@ services:
 networks:
   paperless-network:
     driver: bridge
+
+volumes:
+  db-data:

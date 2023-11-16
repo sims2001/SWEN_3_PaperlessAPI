@@ -156,7 +156,7 @@ namespace PaperLess.WebApi
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, PaperLessDbContext dbContext)
         {
             if (env.IsDevelopment())
             {
@@ -166,6 +166,8 @@ namespace PaperLess.WebApi
             {
                 app.UseHsts();
             }
+
+            dbContext.Database.Migrate();
 
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
