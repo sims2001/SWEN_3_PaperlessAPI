@@ -4,7 +4,7 @@ services:
   paperless-db:
     container_name: paperless-db
     image: postgres:latest
-    restart: always
+    restart: unless-stopped
     environment:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
@@ -19,7 +19,7 @@ services:
   paperless-webapi:
     container_name: paperless-webapi
     image: sims2001/paperless-webapi:master
-    restart: always
+    restart: unless-stopped
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     depends_on:
@@ -32,7 +32,7 @@ services:
   paperless-frontend:
     container_name: paperless-frontend
     image: nginx:latest
-    restart: always
+    restart: unless-stopped
     ports:
       - 80:80
       - 443:443
@@ -47,7 +47,7 @@ services:
   paperless-db-admin:
     container_name: paperless-db-admin
     image: dpage/pgadmin4
-    restart: always
+    restart: unless-stopped
     ports:
       - "8888:80"
     environment:
