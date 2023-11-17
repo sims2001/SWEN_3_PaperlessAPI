@@ -109,6 +109,8 @@ namespace PaperLess.WebApi.Controllers
         [SwaggerOperation("GetDocument")]
         [SwaggerResponse(statusCode: 200, type: typeof(GetDocument200Response), description: "Success")]
         public virtual IActionResult GetDocument([FromRoute (Name = "id")][Required]int id, [FromQuery (Name = "page")]int? page, [FromQuery (Name = "full_perms")]bool? fullPerms) {
+            
+            
             var getDoc = _logic.GetDocument(id, page, fullPerms);
 
             if(! getDoc.IsSuccess)
@@ -225,7 +227,7 @@ namespace PaperLess.WebApi.Controllers
         [Route("/api/documents/")]
         [SwaggerOperation("GetDocuments")]
         [SwaggerResponse(statusCode: 200, type: typeof(GetDocuments200Response), description: "Success")]
-        public virtual IActionResult GetDocuments([FromQuery (Name = "Page")]int? page, [FromQuery (Name = "page_size")]int? pageSize, [FromQuery (Name = "query")]string query, [FromQuery (Name = "ordering")]string ordering, [FromQuery (Name = "tags__id__all")]List<int> tagsIdAll, [FromQuery (Name = "document_type__id")]int? documentTypeId, [FromQuery (Name = "storage_path__id__in")]int? storagePathIdIn, [FromQuery (Name = "correspondent__id")]int? correspondentId, [FromQuery (Name = "truncate_content")]bool? truncateContent)
+        public virtual IActionResult GetDocuments([FromQuery (Name = "Page")]int? page, [FromQuery (Name = "page_size")]int? pageSize, [FromQuery (Name = "query")]string? query, [FromQuery (Name = "ordering")]string? ordering, [FromQuery (Name = "tags__id__all")]List<int>? tagsIdAll, [FromQuery (Name = "document_type__id")]int? documentTypeId, [FromQuery (Name = "storage_path__id__in")]int? storagePathIdIn, [FromQuery (Name = "correspondent__id")]int? correspondentId, [FromQuery (Name = "truncate_content")]bool? truncateContent)
         {
 
             //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...

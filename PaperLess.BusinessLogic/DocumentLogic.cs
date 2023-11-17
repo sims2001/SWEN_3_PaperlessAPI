@@ -42,7 +42,24 @@ namespace PaperLess.BusinessLogic {
         }
 
         public BusinessLogicResult<Document> GetDocument(int id, int? page, bool? fullPerms) {
-            throw new NotImplementedException();
+            if (id <= 0)
+            {
+                return new BusinessLogicResult<Document>()
+                {
+                    IsSuccess = false,
+                    Errors = new List<string> { "Invalid ID" }
+                };
+            }
+
+            var doc = _repository.GetById(id);
+
+
+            return new BusinessLogicResult<Document>()
+            {
+                IsSuccess = true,
+                Result = doc
+                
+            };
         }
 
         public BusinessLogicResult<Document> UpdateDocument(int id, Document document) {
