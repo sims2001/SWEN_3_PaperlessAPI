@@ -16,15 +16,34 @@ services:
     networks:
       - paperless-network
 
+  paperless-storage:
+    container_name: paperless-storage
+    image: quay.io/minio/minio
+    environment:
+      MINIO_ACCESS_KEY: paperless
+      MINIO_SECRET_KEY: paperless
+      MINIO_ROOT_USER: paperless
+      MINIO_ROOT_PASSWORD: paperless
+      MINIO_DEFAULT_BUCKETS: paperless-bucket
+    ports:
+      - "9000:9000"
+      - "9090:9090"
+    volumes:
+      - minio-data:/data
+    command: ["server", "/data", "--console-address", ":9090"]
+    networks:
+      - paperless-network
+
   paperless-webapi:
     container_name: paperless-webapi
-    image: paperless-webapi
-    #image: sims2001/paperless-webapi:master
+    #image: paperless-webapi
+    image: sims2001/paperless-webapi:master
     restart: unless-stopped
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     depends_on:
       - paperless-db
+      - paperless-storage
     ports:
       - 8081:8081
     networks:
@@ -66,3 +85,4 @@ networks:
 
 volumes:
   db-data:
+  minio-data:

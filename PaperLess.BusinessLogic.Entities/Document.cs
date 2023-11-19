@@ -1,4 +1,6 @@
-﻿namespace PaperLess.BusinessLogic.Entities
+﻿using Microsoft.AspNetCore.Http;
+
+namespace PaperLess.BusinessLogic.Entities
 {
     /// <summary>
     /// Document Entity for working in the Controllers
@@ -74,5 +76,10 @@
         /// Gets or Sets ArchivedFileName
         /// </summary>
         public string? ArchivedFileName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IFormFile? UploadDocument { get; set; }
     }
 }

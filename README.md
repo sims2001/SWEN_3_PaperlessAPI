@@ -10,12 +10,12 @@ The project follows a three-layer architecture consisting of the data access lay
 
 Clone the repository and execute the following command to run the services:
 ```bash
-docker compose up -d
+docker-compose up -d
 ```
 
 To Stop the Services run the following command:
 ```bash
-docker compose down --remove-orphans
+docker-compose down --remove-orphans
 ```
 
 
