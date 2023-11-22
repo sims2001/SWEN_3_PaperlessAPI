@@ -9,6 +9,8 @@ using Minio;
 using Minio.DataModel.Args;
 using Minio.Exceptions;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using PaperLess.Queue.Interfaces;
 
 namespace PaperLess.BusinessLogic {
 
@@ -17,12 +19,14 @@ namespace PaperLess.BusinessLogic {
         private readonly IDocumentRepository _repository;
         private readonly ILogger<DocumentLogic> _logger;
         private readonly IMinioClient _minioClient;
+        private readonly IQueueProducer _publisher;
 
-        public DocumentLogic(IValidator<Document> validator, IDocumentRepository repository, ILogger<DocumentLogic> logger, IMinioClient minioClient) {
+        public DocumentLogic(IValidator<Document> validator, IDocumentRepository repository, ILogger<DocumentLogic> logger, IMinioClient minioClient, IQueueProducer publisher) {
             _validator = validator ?? throw new ArgumentNullException(nameof(_validator));
             _repository = repository ?? throw new ArgumentNullException(nameof(_repository));
             _logger = logger ?? throw new ArgumentNullException(nameof(_logger));
             _minioClient = minioClient ?? throw new ArgumentNullException(nameof(_minioClient));
+            _publisher = publisher ?? throw new ArgumentNullException(nameof(_publisher));
         }
         public List<Document> GetDocuments(int? page, int? pageSize, string query, string ordering, List<int> tagsIdAll, int? documentTypeId,
             int? storagePathIdIn, int? correspondentId, bool? truncateContent) {
@@ -43,13 +47,19 @@ namespace PaperLess.BusinessLogic {
             }
 
             //STEP 3a
-            _repository.AddDocument(document);
+            var documentId = _repository.AddDocument(document);
             
             //STEP 3b
             var uploadedName = await SaveFile(document.UploadDocument);
 
+            var messageContent = new {
+                documentId = documentId,
+                uploadedName = uploadedName
+            };
+
+            var message = JsonConvert.SerializeObject(messageContent);
             //Step 3c
-            //RabbitMQ Publish Shit
+            _publisher.PublishToQueue(message);
 
             return new BusinessLogicResult {
                 IsSuccess = true,
