@@ -38,8 +38,8 @@ services:
       - "5672:5672"
       - "9093:15672"
     environment:
-      RABBITMQ_DEFAULT_PASS: paperless
       RABBITMQ_DEFAULT_USER: paperless
+      RABBITMQ_DEFAULT_PASS: paperless
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
 
