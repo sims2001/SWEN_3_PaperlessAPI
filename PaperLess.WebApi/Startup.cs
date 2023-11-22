@@ -31,6 +31,9 @@ using PaperLess.DataAccess.SQL.PostgresRepositories;
 using Minio;
 using Minio.Exceptions;
 using Minio.DataModel.Args;
+using RabbitMQ.Client;
+using PaperLess.Queue.Interfaces;
+using PaperLess.BusinessLogic.Queue;
 
 namespace PaperLess.WebApi
 {
@@ -72,8 +75,6 @@ namespace PaperLess.WebApi
                 return minioClient;
             });
 
-
-
             services.AddLogging(builder => {
                 builder.AddConsole();
             });
@@ -81,6 +82,13 @@ namespace PaperLess.WebApi
             services.AddDbContext<PaperLessDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("PostgreSQLConnection")));
                 //options.UseNpgsql(Configuration.GetConnectionString("PostgresDev")));
+
+            services.Configure<QueueOptions>(options => {
+                options.ConnectionString = "amqp://paperless:paperless@paperless-queue";
+                options.QueueName = "paperless-queue";
+            });
+
+            services.AddTransient<IQueueProducer, QueueProducer>();
 
             services.AddScoped<IValidator<Tag>, TagValidator>();
             services.AddScoped<IValidator<Correspondent>, CorrespondentValidator>();

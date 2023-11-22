@@ -19,11 +19,13 @@ namespace PaperLess.DataAccess.SQL.PostgresRepositories{
             _logger = logger ?? throw new ArgumentNullException(nameof(_logger));
         }
 
-        public void AddDocument(Document document)
+        public int AddDocument(Document document)
         {
             var newDoc = _mapper.Map<DocumentDAL>(document);
             _context.Documents.Add(newDoc);
             _context.SaveChanges();
+
+            return (int) newDoc.Id;
         }
 
         public void DeleteDocument(int id)
