@@ -46,7 +46,10 @@ services:
   paperless-webapi:
     container_name: paperless-webapi
     #image: paperless-webapi
-    image: sims2001/paperless-webapi:master
+    #image: sims2001/paperless-webapi:master
+    build: 
+      context: ./PaperLess.REST
+      dockerfile: Dockerfile
     restart: unless-stopped
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
@@ -81,6 +84,18 @@ services:
       PGADMIN_DEFAULT_PASSWORD: paperless
     depends_on:
       - paperless-db
+
+  paperless-ocr-worker:
+    container_name: paperless-ocr-worker
+    build: 
+      context: .
+      dockerfile: ./PaperLess.OCR/Dockerfile
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    depends_on:
+      - paperless-queue
+      - paperless-webapi
 
 volumes:
   db-data:
