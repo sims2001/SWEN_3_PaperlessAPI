@@ -52,9 +52,9 @@ namespace PaperLess.BusinessLogic {
             //STEP 3b
             var uploadedName = await SaveFile(document.UploadDocument);
 
-            var messageContent = new {
-                documentId = documentId,
-                uploadedName = uploadedName
+            var messageContent = new QueueContent{
+                DocumentId = documentId,
+                UploadedName = uploadedName
             };
 
             var message = JsonConvert.SerializeObject(messageContent);

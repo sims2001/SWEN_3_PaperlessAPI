@@ -94,7 +94,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     depends_on:
+      - paperless-db
       - paperless-queue
+      - paperless-storage
       - paperless-webapi
 
 volumes:

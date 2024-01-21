@@ -2,9 +2,22 @@
   <ItemGroup>
     <ProjectReference Include="..\PaperLess.ServiceAgents.Interfaces\PaperLess.ServiceAgents.Interfaces.csproj" />
     <ProjectReference Include="..\..\PaperLess.REST\PaperLess.Queue.Interfaces\PaperLess.Queue.Interfaces.csproj" />
+    <ProjectReference Include="..\..\PaperLess.REST\PaperLess.DataAccess.Entities\PaperLess.DataAccess.Entities.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="13.1.2" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="13.5.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.14">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.14">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Minio" Version="6.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
     <PackageReference Include="Tesseract" Version="5.2.0" />
   </ItemGroup>
   <PropertyGroup>

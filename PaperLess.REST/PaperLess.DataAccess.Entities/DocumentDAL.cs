@@ -1,4 +1,4 @@
-﻿namespace PaperLess.DataAccess.Entities{
+﻿namespace PaperLess.DataAccess.Entities {
     public class DocumentDAL
     {
         public int? Id { get; set; }
