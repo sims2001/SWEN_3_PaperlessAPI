@@ -7,6 +7,7 @@ ENV ConnectionStrings__PostgreSQLConnection "Host=paperless-db;Database=paperles
 COPY PaperLess.OCR/*.sln ./PaperLess.OCR/
 COPY PaperLess.OCR/PaperLess.ServiceAgents/*.csproj ./PaperLess.OCR/PaperLess.ServiceAgents/
 COPY PaperLess.OCR/PaperLess.ServiceAgents.Interfaces/*.csproj ./PaperLess.OCR/PaperLess.ServiceAgents.Interfaces/
+COPY PaperLess.REST/PaperLess.Elastic.Interfaces/*.csproj ./PaperLess.REST/PaperLess.Elastic.Interfaces/
 COPY PaperLess.REST/PaperLess.Queue.Interfaces/*.csproj ./PaperLess.REST/PaperLess.Queue.Interfaces/
 COPY PaperLess.REST/PaperLess.DataAccess.Entities/*.csproj ./PaperLess.REST/PaperLess.DataAccess.Entities/
 
@@ -14,6 +15,7 @@ RUN dotnet restore ./PaperLess.OCR/PaperLess.OCR.sln
 
 COPY PaperLess.OCR/PaperLess.ServiceAgents/. ./PaperLess.OCR/PaperLess.ServiceAgents/
 COPY PaperLess.OCR/PaperLess.ServiceAgents.Interfaces/. ./PaperLess.OCR/PaperLess.ServiceAgents.Interfaces/
+COPY PaperLess.REST/PaperLess.Elastic.Interfaces/. ./PaperLess.REST/PaperLess.Elastic.Interfaces/
 COPY PaperLess.REST/PaperLess.Queue.Interfaces/. ./PaperLess.REST/PaperLess.Queue.Interfaces/
 COPY PaperLess.REST/PaperLess.DataAccess.Entities/. ./PaperLess.REST/PaperLess.DataAccess.Entities/
 

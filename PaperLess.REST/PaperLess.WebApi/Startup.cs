@@ -34,6 +34,8 @@ using Minio.DataModel.Args;
 using RabbitMQ.Client;
 using PaperLess.Queue.Interfaces;
 using PaperLess.BusinessLogic.Queue;
+using PaperLess.Elastic.Interfaces;
+using PaperLess.WebApi.ElasticSearch;
 
 namespace PaperLess.WebApi
 {
@@ -89,6 +91,8 @@ namespace PaperLess.WebApi
             });
 
             services.AddTransient<IQueueProducer, QueueProducer>();
+            
+            services.AddScoped<IElasticSearcher, ElasticSearcher>();
 
             services.AddScoped<IValidator<Tag>, TagValidator>();
             services.AddScoped<IValidator<Correspondent>, CorrespondentValidator>();

@@ -7,6 +7,8 @@ using PaperLess.ServiceAgents.Interfaces;
 using PaperLess.ServiceAgents.OCR;
 using PaperLess.ServiceAgents.DBConnection;
 using Microsoft.EntityFrameworkCore;
+using PaperLess.Elastic.Interfaces;
+using PaperLess.ServiceAgents.ElasticSearch;
 
 async Task EnsureBucketExists(IMinioClient minio, string bucketName) {
     try
@@ -63,6 +65,8 @@ builder.Services.AddSingleton<IMinioClient>(sp =>
 });
 
 builder.Services.AddSingleton<IQueueConsumer, QueueConsumer>();
+
+builder.Services.AddSingleton<IElasticAdder, ElasticAdder>();
 
 builder.Services.AddTransient<IOcrClient, OcrClient>(sp => new OcrClient(new OcrOptions()));
 

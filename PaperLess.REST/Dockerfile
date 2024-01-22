@@ -13,6 +13,7 @@ COPY PaperLess.BusinessLogic/*.csproj ./PaperLess.BusinessLogic/
 COPY PaperLess.DataAccess.Interfaces/*.csproj ./PaperLess.DataAccess.Interfaces/
 COPY PaperLess.DataAccess.Entities/*.csproj ./PaperLess.DataAccess.Entities/
 COPY PaperLess.DataAccess.SQL/*.csproj ./PaperLess.DataAccess.SQL/
+COPY PaperLess.Elastic.Interfaces/*.csproj ./PaperLess.Elastic.Interfaces/
 COPY PaperLess.Queue.Interfaces/*.csproj ./PaperLess.Queue.Interfaces/
 
 RUN dotnet restore
@@ -25,6 +26,7 @@ COPY PaperLess.BusinessLogic/. ./PaperLess.BusinessLogic/
 COPY PaperLess.DataAccess.Interfaces/. ./PaperLess.DataAccess.Interfaces/
 COPY PaperLess.DataAccess.Entities/. ./PaperLess.DataAccess.Entities/
 COPY PaperLess.DataAccess.SQL/. ./PaperLess.DataAccess.SQL/
+COPY PaperLess.Elastic.Interfaces/. ./PaperLess.Elastic.Interfaces/
 COPY PaperLess.Queue.Interfaces/. ./PaperLess.Queue.Interfaces/
 
 WORKDIR /app/PaperLess.WebApi

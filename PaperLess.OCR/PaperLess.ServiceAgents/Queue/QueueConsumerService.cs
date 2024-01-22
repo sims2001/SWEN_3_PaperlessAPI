@@ -9,6 +9,7 @@ using Minio.DataModel.Args;
 using PaperLess.Queue.Interfaces;
 using PaperLess.ServiceAgents.Interfaces;
 using PaperLess.ServiceAgents.DBConnection;
+using PaperLess.Elastic.Interfaces;
 
 namespace PaperLess.ServiceAgents.Queue {
 
@@ -18,14 +19,16 @@ namespace PaperLess.ServiceAgents.Queue {
         private readonly IMinioClient _minioClient;
         private readonly IOcrClient _ocrClient;
         private readonly PaperLessDbContext _dbContext;
+        private readonly IElasticAdder _elastic;
         private readonly ILogger<QueueConsumerService> _logger;
 
-        public QueueConsumerService(IQueueConsumer queueConsumer, IMinioClient minioClient, IOcrClient ocrClient, PaperLessDbContext dbContext, ILogger<QueueConsumerService> logger)
+        public QueueConsumerService(IQueueConsumer queueConsumer, IMinioClient minioClient, IOcrClient ocrClient, PaperLessDbContext dbContext, IElasticAdder elastic, ILogger<QueueConsumerService> logger)
         {
             _queueConsumer = queueConsumer;
             _minioClient = minioClient;
             _ocrClient = ocrClient;
             _dbContext = dbContext;
+            _elastic = elastic;
             _logger = logger;
             _queueConsumer.OnReceived += OnReceived;
         }
@@ -67,9 +70,13 @@ namespace PaperLess.ServiceAgents.Queue {
             _logger.LogInformation($"DoneWithOCR");
             _logger.LogInformation(ocrContent);
             
-            var theDoc = await _dbContext.Documents.FindAsync(queueContent.DocumentId);
-            theDoc.Content = ocrContent;
-            await _dbContext.SaveChangesAsync();
+            UpdateDatabase(queueContent.DocumentId, ocrContent);
+
+            _elastic.AddDocToElastic(new ElasticDoc{
+                Id = queueContent.DocumentId,
+                Title = queueContent.UploadedName,
+                Content = ocrContent
+            });
             //HIER NOCH SHIT IN DIE DATENBANK BZW ERROR HANDLING UND ALLES TUTI BUENE!!!
         }
 
@@ -113,6 +120,14 @@ namespace PaperLess.ServiceAgents.Queue {
             return null;
 
         }
+
+        private async void UpdateDatabase(int DocumentId, string fileContent) {
+            var theDoc = await _dbContext.Documents.FindAsync(DocumentId);
+            theDoc.Content = fileContent;
+            await _dbContext.SaveChangesAsync();
+        }
+
+
     }
 
 }

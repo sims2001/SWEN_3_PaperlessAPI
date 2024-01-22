@@ -3,6 +3,7 @@
     <ProjectReference Include="..\PaperLess.ServiceAgents.Interfaces\PaperLess.ServiceAgents.Interfaces.csproj" />
     <ProjectReference Include="..\..\PaperLess.REST\PaperLess.Queue.Interfaces\PaperLess.Queue.Interfaces.csproj" />
     <ProjectReference Include="..\..\PaperLess.REST\PaperLess.DataAccess.Entities\PaperLess.DataAccess.Entities.csproj" />
+    <ProjectReference Include="..\..\PaperLess.REST\PaperLess.Elastic.Interfaces\PaperLess.Elastic.Interfaces.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="13.5.0" />

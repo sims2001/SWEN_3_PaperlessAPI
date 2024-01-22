@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperLess.Queue.Interfaces"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperLess.DataAccess.Entities", "..\PaperLess.REST\PaperLess.DataAccess.Entities\PaperLess.DataAccess.Entities.csproj", "{1BB86311-5F4A-48C5-AB06-6D445A76DA0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperLess.Elastic.Interfaces", "..\PaperLess.REST\PaperLess.Elastic.Interfaces\PaperLess.Elastic.Interfaces.csproj", "{C49199F9-92E5-4055-B016-258412CFF35F}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,5 +86,17 @@ Global
 		{1BB86311-5F4A-48C5-AB06-6D445A76DA0E}.Release|x64.Build.0 = Release|Any CPU
 		{1BB86311-5F4A-48C5-AB06-6D445A76DA0E}.Release|x86.ActiveCfg = Release|Any CPU
 		{1BB86311-5F4A-48C5-AB06-6D445A76DA0E}.Release|x86.Build.0 = Release|Any CPU
+		{C49199F9-92E5-4055-B016-258412CFF35F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C49199F9-92E5-4055-B016-258412CFF35F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C49199F9-92E5-4055-B016-258412CFF35F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C49199F9-92E5-4055-B016-258412CFF35F}.Debug|x64.Build.0 = Debug|Any CPU
+		{C49199F9-92E5-4055-B016-258412CFF35F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C49199F9-92E5-4055-B016-258412CFF35F}.Debug|x86.Build.0 = Debug|Any CPU
+		{C49199F9-92E5-4055-B016-258412CFF35F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C49199F9-92E5-4055-B016-258412CFF35F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C49199F9-92E5-4055-B016-258412CFF35F}.Release|x64.ActiveCfg = Release|Any CPU
+		{C49199F9-92E5-4055-B016-258412CFF35F}.Release|x64.Build.0 = Release|Any CPU
+		{C49199F9-92E5-4055-B016-258412CFF35F}.Release|x86.ActiveCfg = Release|Any CPU
+		{C49199F9-92E5-4055-B016-258412CFF35F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -9,6 +9,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using Newtonsoft.Json;
 using PaperLess.WebApi.Attributes;
 using PaperLess.WebApi.Entities;
+using PaperLess.Elastic.Interfaces;
 
 namespace PaperLess.WebApi.Controllers
 { 
@@ -18,6 +19,11 @@ namespace PaperLess.WebApi.Controllers
     [ApiController]
     public class SearchApiController : ControllerBase
     { 
+        private readonly IElasticSearcher _elastic;
+        public SearchApiController(IElasticSearcher elastic) {
+            _elastic = elastic;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -25,23 +31,15 @@ namespace PaperLess.WebApi.Controllers
         /// <param name="limit"></param>
         /// <response code="200">Success</response>
         [HttpGet]
-        [Route("/api/search/autocomplete/")]
+        [Route("/api/search/")]
         [ValidateModelState]
-        [SwaggerOperation("AutoComplete")]
+        [SwaggerOperation("Search")]
         [SwaggerResponse(statusCode: 200, type: typeof(List<string>), description: "Success")]
-        public virtual IActionResult AutoComplete([FromQuery (Name = "term")]string term, [FromQuery (Name = "limit")]int? limit)
+        public virtual IActionResult AutoComplete([FromQuery (Name = "term")]string term)
         {
+            var foundDocs = _elastic.SearchDocument(term);
 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(List<string>));
-            string exampleJson = null;
-            exampleJson = "[ \"\", \"\" ]";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<List<string>>(exampleJson)
-            : default(List<string>);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
+            return new ObjectResult(foundDocs);
         }
     }
 }
