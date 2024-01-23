@@ -27,17 +27,16 @@ namespace PaperLess.WebApi.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="term"></param>
-        /// <param name="limit"></param>
+        /// <param name="searchTerm"></param>
         /// <response code="200">Success</response>
         [HttpGet]
         [Route("/api/search/")]
         [ValidateModelState]
-        [SwaggerOperation("Search")]
-        [SwaggerResponse(statusCode: 200, type: typeof(List<string>), description: "Success")]
-        public virtual IActionResult AutoComplete([FromQuery (Name = "term")]string term)
+        [SwaggerOperation("SearchDocuments")]
+        [SwaggerResponse(statusCode: 200, type: typeof(List<ElasticDoc>), description: "Success")]
+        public virtual IActionResult SearchDocuments([FromQuery (Name = "searchTerm")]string searchTerm)
         {
-            var foundDocs = _elastic.SearchDocument(term);
+            var foundDocs = _elastic.SearchDocument(searchTerm);
 
             return new ObjectResult(foundDocs);
         }

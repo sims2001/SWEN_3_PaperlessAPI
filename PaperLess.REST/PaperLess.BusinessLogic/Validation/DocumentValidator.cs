@@ -9,7 +9,7 @@ using PaperLess.BusinessLogic.Entities;
 namespace PaperLess.BusinessLogic.Validation {
     public class DocumentValidator : AbstractValidator<Document> {
         public DocumentValidator() {
-            RuleFor(document => document.Correspondent).NotNull().WithMessage("Correspondent is required");
+            //RuleFor(document => document.Correspondent).NotNull().WithMessage("Correspondent is required");
             RuleFor(document => document.Title).NotEmpty().WithMessage("Title is required");
             //RuleFor(document => document.Created).NotNull().WithMessage("Created is required");
             //RuleFor(document => document.CreatedDate).NotNull().WithMessage("CreatedDate is required");

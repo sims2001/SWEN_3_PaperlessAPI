@@ -37,9 +37,11 @@ namespace PaperLess.BusinessLogic {
         //public async Task<BusinessLogicResult> CreateDocument(Document document)
         public async Task<BusinessLogicResult> CreateDocument(Document document) {
 
+            _logger.LogInformation($"Validating Document: {document}");
             var validationResult = _validator.Validate(document);
 
             if (!validationResult.IsValid) {
+                _logger.LogWarning($"Document Validation Failed!");
                 return new BusinessLogicResult {
                     IsSuccess = false,
                     Errors = validationResult.Errors.Select(error => error.ErrorMessage).ToList()
@@ -54,12 +56,14 @@ namespace PaperLess.BusinessLogic {
 
             var messageContent = new QueueContent{
                 DocumentId = documentId,
+                DocumentTitle = document.Title,
                 UploadedName = uploadedName
             };
 
             var message = JsonConvert.SerializeObject(messageContent);
             //Step 3c
             _publisher.PublishToQueue(message);
+            _logger.LogInformation($"Published Message to Queue: {message}");
 
             return new BusinessLogicResult {
                 IsSuccess = true,
@@ -121,6 +125,8 @@ namespace PaperLess.BusinessLogic {
         }
 
         protected async Task<string> SaveFile(IFormFile file) {
+            _logger.LogInformation($"Saving File '{file.FileName}' to MinIO");
+
             var bucketName = "paperless-bucket";
 
             string originalName = file.FileName;
@@ -145,11 +151,11 @@ namespace PaperLess.BusinessLogic {
                             .WithContentType(contentType);
 
                     await _minioClient.PutObjectAsync(putObjectArgs).ConfigureAwait(false);
-
+                    _logger.LogInformation("Saved File to MinIO");
                 }
             } catch (MinioException e)
             {
-                Console.WriteLine($"Minio Error: {e.Message}");
+                _logger.LogError("Couldnt save File  to MinIO");
             }
 
             return uniqueName;

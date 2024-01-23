@@ -25,6 +25,8 @@ namespace PaperLess.DataAccess.SQL.PostgresRepositories{
             _context.Documents.Add(newDoc);
             _context.SaveChanges();
 
+            _logger.LogInformation($"Saved Doc with Id: {newDoc.Id} to Database");
+
             return (int) newDoc.Id;
         }
 

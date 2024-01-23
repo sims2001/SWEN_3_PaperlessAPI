@@ -74,10 +74,9 @@ namespace PaperLess.ServiceAgents.Queue {
 
             _elastic.AddDocToElastic(new ElasticDoc{
                 Id = queueContent.DocumentId,
-                Title = queueContent.UploadedName,
+                Title = queueContent.DocumentTitle,
                 Content = ocrContent
             });
-            //HIER NOCH SHIT IN DIE DATENBANK BZW ERROR HANDLING UND ALLES TUTI BUENE!!!
         }
 
         private async Task<FileStream?> GetMinIOFileContent(string filename){

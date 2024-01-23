@@ -43,6 +43,20 @@ services:
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
 
+  paperless-elastic:
+    container_name: paperless-elastic
+    image: elasticsearch:8.7.1
+    environment:
+      - discovery.type=single-node
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "xpack.security.enabled=false"
+      - "xpack.security.enrollment.enabled=false"
+    ports:
+      - 9200:9200
+      - 9300:9300
+
   paperless-webapi:
     container_name: paperless-webapi
     #image: paperless-webapi
@@ -57,6 +71,7 @@ services:
       - paperless-db
       - paperless-storage
       - paperless-queue
+      - paperless-elastic
     ports:
       - 8081:8081
 
@@ -85,19 +100,7 @@ services:
     depends_on:
       - paperless-db
 
-  paperless-elastic:
-    container_name: paperless-elastic
-    image: elasticsearch:8.7.1
-    environment:
-      - discovery.type=single-node
-      - cluster.name=docker-cluster
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - "xpack.security.enabled=false"
-      - "xpack.security.enrollment.enabled=false"
-    ports:
-      - 9200:9200
-      - 9300:9300
+
 
   paperless-ocr-worker:
     container_name: paperless-ocr-worker
@@ -112,6 +115,7 @@ services:
       - paperless-queue
       - paperless-storage
       - paperless-webapi
+      - paperless-elastic
 
 volumes:
   db-data:

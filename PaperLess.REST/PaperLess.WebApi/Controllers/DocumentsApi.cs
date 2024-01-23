@@ -302,6 +302,7 @@ namespace PaperLess.WebApi.Controllers
         [SwaggerOperation("UploadDocument")]
         public virtual async Task<IActionResult> UploadDocument([FromForm] CreateDocumentRequest newDocumentRequest) {
 
+            _logger.LogInformation("New Document Upload Request");
             var newDocument = _mapper.Map<Document>(newDocumentRequest);
                        
             var result = await _logic.CreateDocument(newDocument);
