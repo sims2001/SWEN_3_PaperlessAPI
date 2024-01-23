@@ -29,14 +29,27 @@ namespace PaperLess.BusinessLogic {
                 };
             }
 
-            documentType.Name= "funnyfink";
-            //TODO: IMPLEMENT DB CALL
+            try
+            {
+                documentType.Name = "funnyfink";
+                //TODO: IMPLEMENT DB CALL
 
 
-            return new BusinessLogicResult<DocumentType> {
-                IsSuccess = true,
-                Result = documentType
-            };
+                return new BusinessLogicResult<DocumentType>
+                {
+                    IsSuccess = true,
+                    Result = documentType
+                };
+            } catch (Exception e) 
+            {
+                _logger.LogError("Couldnt create DocumentType");
+                return new BusinessLogicResult<DocumentType>
+                {
+                    IsSuccess = false,
+                    Errors = validationResult.Errors.Select(error => error.ErrorMessage).ToList()
+                };
+            }
+            
         }
 
         public BusinessLogicResult<DocumentType> UpdateDocumentType(int id, DocumentType documentType) {
@@ -49,14 +62,27 @@ namespace PaperLess.BusinessLogic {
                 };
             }
 
-            documentType.Name = "funnyfink";
-            //TODO: IMPLEMENT DB CALL
+            try
+            {
+                documentType.Name = "funnyfink";
+                //TODO: IMPLEMENT DB CALL
 
 
-            return new BusinessLogicResult<DocumentType> {
-                IsSuccess = true,
-                Result = documentType
-            };
+                return new BusinessLogicResult<DocumentType>
+                {
+                    IsSuccess = true,
+                    Result = documentType
+                };
+            } catch(Exception e)
+            {
+                _logger.LogError("Couldnt update DocumentType");
+                return new BusinessLogicResult<DocumentType>
+                {
+                    IsSuccess = false,
+                    Errors = validationResult.Errors.Select(error => error.ErrorMessage).ToList()
+                };
+            }
+           
         }
 
         public BusinessLogicResult DeleteDocumentType(int id) {
@@ -66,10 +92,23 @@ namespace PaperLess.BusinessLogic {
                     Errors = new List<string> { "Invalid ID" }
                 };
             }
-
-            return new BusinessLogicResult() {
-                IsSuccess = true
-            };
+            try
+            {
+                //TODO: IMPLEMENT DB CALL
+                return new BusinessLogicResult()
+                {
+                    IsSuccess = true
+                };
+            } catch (Exception e)
+            {
+                _logger.LogError("Couldnt delete DocumentType");
+                return new BusinessLogicResult()
+                {
+                    IsSuccess = false,
+                    Errors = new List<string> { "Could not delete DocumentType" }
+                };
+            }
+            
         }
     }
 

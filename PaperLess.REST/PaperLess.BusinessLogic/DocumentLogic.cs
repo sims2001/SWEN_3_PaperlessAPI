@@ -48,26 +48,40 @@ namespace PaperLess.BusinessLogic {
                 };
             }
 
-            //STEP 3a
-            var documentId = _repository.AddDocument(document);
+            try
+            {
+                //STEP 3a
+                var documentId = _repository.AddDocument(document);
+
+                //STEP 3b
+                var uploadedName = await SaveFile(document.UploadDocument);
+
+                var messageContent = new QueueContent
+                {
+                    DocumentId = documentId,
+                    DocumentTitle = document.Title,
+                    UploadedName = uploadedName
+                };
+
+                var message = JsonConvert.SerializeObject(messageContent);
+                //Step 3c
+                _publisher.PublishToQueue(message);
+                _logger.LogInformation($"Published Message to Queue: {message}");
+
+                return new BusinessLogicResult
+                {
+                    IsSuccess = true,
+                };
+            } catch(Exception e ) 
+            {
+                _logger.LogWarning($"Could not create document");
+                return new BusinessLogicResult
+                {
+                    IsSuccess = false,
+                    Errors = validationResult.Errors.Select(error => error.ErrorMessage).ToList()
+                };
+            }
             
-            //STEP 3b
-            var uploadedName = await SaveFile(document.UploadDocument);
-
-            var messageContent = new QueueContent{
-                DocumentId = documentId,
-                DocumentTitle = document.Title,
-                UploadedName = uploadedName
-            };
-
-            var message = JsonConvert.SerializeObject(messageContent);
-            //Step 3c
-            _publisher.PublishToQueue(message);
-            _logger.LogInformation($"Published Message to Queue: {message}");
-
-            return new BusinessLogicResult {
-                IsSuccess = true,
-            };
         }
 
         public BusinessLogicResult<Document> GetDocument(int id, int? page, bool? fullPerms) {
@@ -80,15 +94,26 @@ namespace PaperLess.BusinessLogic {
                 };
             }
 
-            var doc = _repository.GetById(id);
-
-
-            return new BusinessLogicResult<Document>()
+            try
             {
-                IsSuccess = true,
-                Result = doc
-                
-            };
+                var doc = _repository.GetById(id);
+
+
+                return new BusinessLogicResult<Document>()
+                {
+                    IsSuccess = true,
+                    Result = doc
+
+                };
+            } catch (Exception e)
+            {
+                _logger.LogError("Couldnt get file with ID: " + id +" from DB");
+                return new BusinessLogicResult<Document>()
+                {
+                    IsSuccess = false,
+                    Errors = new List<string> { "Could not find file with this ID: " + id }
+                };
+            }
         }
 
         public BusinessLogicResult<Document> UpdateDocument(int id, Document document) {
@@ -100,15 +125,26 @@ namespace PaperLess.BusinessLogic {
                     Errors = validationResult.Errors.Select(error => error.ErrorMessage).ToList()
                 };
             }
+            try
+            {
+                document.OriginalFileName = "funnyfink";
+                //TODO: IMPLEMENT DB CALL
 
-            document.OriginalFileName = "funnyfink";
-            //TODO: IMPLEMENT DB CALL
 
-
-            return new BusinessLogicResult<Document> {
-                IsSuccess = true,
-                Result = document
-            };
+                return new BusinessLogicResult<Document> {
+                    IsSuccess = true,
+                    Result = document
+                };
+            }
+            catch(Exception e)
+            {
+                _logger.LogError("Couldnt update file in DB");
+                return new BusinessLogicResult<Document>
+                {
+                    IsSuccess = false,
+                    Errors = validationResult.Errors.Select(error => error.ErrorMessage).ToList()
+                };
+            }
         }
 
         public BusinessLogicResult DeleteDocument(int id) {
@@ -155,7 +191,7 @@ namespace PaperLess.BusinessLogic {
                 }
             } catch (MinioException e)
             {
-                _logger.LogError("Couldnt save File  to MinIO");
+                _logger.LogError("Couldnt save File to MinIO");
             }
 
             return uniqueName;

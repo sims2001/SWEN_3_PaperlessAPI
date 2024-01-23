@@ -33,15 +33,28 @@ namespace PaperLess.BusinessLogic {
                     Errors = validationResult.Errors.Select(error => error.ErrorMessage).ToList()
                 };
             }
+            try
+            {
+                tag.Color = "funnyfink";
+                //TODO: IMPLEMENT DB CALL
 
-            tag.Color = "funnyfink";
-            //TODO: IMPLEMENT DB CALL
 
+                return new BusinessLogicResult<Tag>
+                {
+                    IsSuccess = true,
+                    Result = tag
+                };
+            } catch (Exception e)
+            {
+                _logger.LogError("Couldnt create Tag");
 
-            return new BusinessLogicResult<Tag> {
-                IsSuccess = true,
-                Result = tag
-            };
+                return new BusinessLogicResult<Tag>
+                {
+                    IsSuccess = false,
+                    Errors = validationResult.Errors.Select(error => error.ErrorMessage).ToList()
+                };
+            }
+
 
         }
 
@@ -55,14 +68,27 @@ namespace PaperLess.BusinessLogic {
                 };
             }
 
-            tag.Color = "updated";
-            //TODO: IMPLEMENT DB CALL
+            try
+            {
+                tag.Color = "updated";
+                //TODO: IMPLEMENT DB CALL
 
 
-            return new BusinessLogicResult<Tag> {
-                IsSuccess = true,
-                Result = tag
-            };
+                return new BusinessLogicResult<Tag>
+                {
+                    IsSuccess = true,
+                    Result = tag
+                };
+            } catch (Exception e)
+            {
+                _logger.LogError("Couldnt create Tag");
+
+                return new BusinessLogicResult<Tag>
+                {
+                    IsSuccess = false,
+                    Errors = validationResult.Errors.Select(error => error.ErrorMessage).ToList()
+                };
+            }
         }
 
         public BusinessLogicResult DeleteTag(int id) {
@@ -72,10 +98,23 @@ namespace PaperLess.BusinessLogic {
                     Errors = new List<string> { "Invalid ID" }
                 };
             }
-
-            return new BusinessLogicResult() {
-                IsSuccess = true
-            };
+            try
+            {
+                //TODO: IMPLEMENT DB CALL
+                return new BusinessLogicResult()
+                {
+                    IsSuccess = true
+                };
+            } catch (Exception e)
+            {
+                _logger.LogError("Couldnt delete Tag");
+                return new BusinessLogicResult()
+                {
+                    IsSuccess = false,
+                    Errors = new List<string> { "Could not delete Tag" }
+                };
+            }
+           
         }
     }
 
