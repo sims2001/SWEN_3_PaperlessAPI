@@ -1,7 +1,7 @@
 using AutoMapper;
-using PaperLess.DataAccess.Entities;
+using PaperLess.BusinessLogic.Entities;
 
-namespace PaperLess.BusinessLogic.Entities.Mappers;
+namespace PaperLess.DataAccess.Entities.Mapper;
 
 public class DalModelMapperProfile : Profile
 {

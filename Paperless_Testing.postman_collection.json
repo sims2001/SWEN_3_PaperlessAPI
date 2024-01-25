@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "379ff2c7-dcb1-4dc0-b848-8c411b12e06f",
+		"name": "Paperless Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25151123"
+	},
+	"item": [
+		{
+			"name": "Upload Document",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Second_Postman.pdf",
+							"type": "text"
+						},
+						{
+							"key": "document",
+							"type": "file",
+							"src": "postman-cloud:///1eebbaa6-7849-4280-894d-c74ac6adf73d"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/documents/post_document",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"documents",
+						"post_document"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Document",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/search?searchTerm=hello",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"search"
+					],
+					"query": [
+						{
+							"key": "searchTerm",
+							"value": "hello"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

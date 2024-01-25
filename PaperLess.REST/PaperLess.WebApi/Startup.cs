@@ -16,24 +16,21 @@ using PaperLess.BusinessLogic;
 using PaperLess.BusinessLogic.Entities;
 using PaperLess.BusinessLogic.Interfaces;
 using PaperLess.BusinessLogic.Validation;
-using PaperLess.WebApi.Authentication;
 using PaperLess.WebApi.OpenApi;
 using PaperLess.WebApi.Filters;
 using PaperLess.WebApi.Formatters;
-using PaperLess.WebApi.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using PaperLess.BusinessLogic.Entities.Mappers;
-using AutoMapper;
+using PaperLess.BusinessLogic.Entities.Mapper;
 using PaperLess.DataAccess.Interfaces;
 using PaperLess.DataAccess.SQL;
 using PaperLess.DataAccess.SQL.PostgresRepositories;
 using Minio;
 using Minio.Exceptions;
 using Minio.DataModel.Args;
-using RabbitMQ.Client;
 using PaperLess.Queue.Interfaces;
 using PaperLess.BusinessLogic.Queue;
+using PaperLess.DataAccess.Entities.Mapper;
 using PaperLess.Elastic.Interfaces;
 using PaperLess.WebApi.ElasticSearch;
 
@@ -108,6 +105,7 @@ namespace PaperLess.WebApi
             services.AddScoped<IDocumentLogic, DocumentLogic>();
             services.AddScoped<IDocumentTypeLogic, DocumentTypeLogic>();
             services.AddScoped<ICorrespondentLogic, CorrespondentLogic>();
+            services.AddScoped<ISearchLogic, SearchLogic>();
 
             // Add framework services.
             services

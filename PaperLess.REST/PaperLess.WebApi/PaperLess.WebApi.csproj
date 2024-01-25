@@ -31,7 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PaperLess.BusinessLogic\PaperLess.BusinessLogic.csproj" />
+    <ProjectReference Include="..\PaperLess.DataAccess.Entities\PaperLess.DataAccess.Entities.csproj" />
     <ProjectReference Include="..\PaperLess.DataAccess.SQL\PaperLess.DataAccess.SQL.csproj" />
-    <ProjectReference Include="..\PaperLess.Elastic.Interfaces\PaperLess.Elastic.Interfaces.csproj" />
   </ItemGroup>
 </Project>

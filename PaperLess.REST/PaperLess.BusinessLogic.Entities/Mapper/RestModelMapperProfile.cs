@@ -1,7 +1,7 @@
 using AutoMapper;
 using PaperLess.WebApi.Entities;
 
-namespace PaperLess.BusinessLogic.Entities.Mappers;
+namespace PaperLess.BusinessLogic.Entities.Mapper;
 
 public class RestModelMapperProfile : Profile
 {

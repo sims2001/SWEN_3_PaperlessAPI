@@ -72,13 +72,14 @@ namespace PaperLess.BusinessLogic {
                 {
                     IsSuccess = true,
                 };
+                
             } catch(Exception e ) 
             {
                 _logger.LogWarning($"Could not create document");
                 return new BusinessLogicResult
                 {
                     IsSuccess = false,
-                    Errors = validationResult.Errors.Select(error => error.ErrorMessage).ToList()
+                    Errors = new List<string>(){ e.Message }
                 };
             }
             

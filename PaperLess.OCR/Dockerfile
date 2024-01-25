@@ -10,6 +10,9 @@ COPY PaperLess.OCR/PaperLess.ServiceAgents.Interfaces/*.csproj ./PaperLess.OCR/P
 COPY PaperLess.REST/PaperLess.Elastic.Interfaces/*.csproj ./PaperLess.REST/PaperLess.Elastic.Interfaces/
 COPY PaperLess.REST/PaperLess.Queue.Interfaces/*.csproj ./PaperLess.REST/PaperLess.Queue.Interfaces/
 COPY PaperLess.REST/PaperLess.DataAccess.Entities/*.csproj ./PaperLess.REST/PaperLess.DataAccess.Entities/
+COPY PaperLess.REST/PaperLess.BusinessLogic.Entities/*.csproj ./PaperLess.REST/PaperLess.BusinessLogic.Entities/
+COPY PaperLess.REST/PaperLess.WebApi.Entities/*.csproj ./PaperLess.REST/PaperLess.WebApi.Entities/
+
 
 RUN dotnet restore ./PaperLess.OCR/PaperLess.OCR.sln
 
@@ -18,6 +21,8 @@ COPY PaperLess.OCR/PaperLess.ServiceAgents.Interfaces/. ./PaperLess.OCR/PaperLes
 COPY PaperLess.REST/PaperLess.Elastic.Interfaces/. ./PaperLess.REST/PaperLess.Elastic.Interfaces/
 COPY PaperLess.REST/PaperLess.Queue.Interfaces/. ./PaperLess.REST/PaperLess.Queue.Interfaces/
 COPY PaperLess.REST/PaperLess.DataAccess.Entities/. ./PaperLess.REST/PaperLess.DataAccess.Entities/
+COPY PaperLess.REST/PaperLess.BusinessLogic.Entities/. ./PaperLess.REST/PaperLess.BusinessLogic.Entities/
+COPY PaperLess.REST/PaperLess.WebApi.Entities/. ./PaperLess.REST/PaperLess.WebApi.Entities/
 
 WORKDIR /app/PaperLess.OCR/PaperLess.ServiceAgents
 RUN dotnet publish -c Release -o out

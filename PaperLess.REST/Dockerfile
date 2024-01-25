@@ -7,12 +7,15 @@ ENV ConnectionStrings__PostgreSQLConnection "Host=paperless-db;Database=paperles
 COPY *.sln .
 COPY PaperLess.WebApi/*.csproj ./PaperLess.WebApi/
 COPY PaperLess.WebApi.Entities/*.csproj ./PaperLess.WebApi.Entities/
+COPY PaperLess.WebApi.Tests/*.csproj ./PaperLess.WebApi.Tests/
 COPY PaperLess.BusinessLogic.Interfaces/*.csproj ./PaperLess.BusinessLogic.Interfaces/
 COPY PaperLess.BusinessLogic.Entities/*.csproj ./PaperLess.BusinessLogic.Entities/
 COPY PaperLess.BusinessLogic/*.csproj ./PaperLess.BusinessLogic/
+COPY PaperLess.BusinessLogic.Tests/*.csproj ./PaperLess.BusinessLogic.Tests/
 COPY PaperLess.DataAccess.Interfaces/*.csproj ./PaperLess.DataAccess.Interfaces/
 COPY PaperLess.DataAccess.Entities/*.csproj ./PaperLess.DataAccess.Entities/
 COPY PaperLess.DataAccess.SQL/*.csproj ./PaperLess.DataAccess.SQL/
+COPY PaperLess.DataAccess.Tests/*.csproj ./PaperLess.DataAccess.Tests/
 COPY PaperLess.Elastic.Interfaces/*.csproj ./PaperLess.Elastic.Interfaces/
 COPY PaperLess.Queue.Interfaces/*.csproj ./PaperLess.Queue.Interfaces/
 
@@ -20,12 +23,15 @@ RUN dotnet restore
 
 COPY PaperLess.WebApi/. ./PaperLess.WebApi/
 COPY PaperLess.WebApi.Entities/. ./PaperLess.WebApi.Entities/
+COPY PaperLess.WebApi.Tests/. ./PaperLess.WebApi.Tests/
 COPY PaperLess.BusinessLogic.Interfaces/. ./PaperLess.BusinessLogic.Interfaces/
 COPY PaperLess.BusinessLogic.Entities/. ./PaperLess.BusinessLogic.Entities/
 COPY PaperLess.BusinessLogic/. ./PaperLess.BusinessLogic/
+COPY PaperLess.BusinessLogic.Tests/. ./PaperLess.BusinessLogic.Tests/
 COPY PaperLess.DataAccess.Interfaces/. ./PaperLess.DataAccess.Interfaces/
 COPY PaperLess.DataAccess.Entities/. ./PaperLess.DataAccess.Entities/
 COPY PaperLess.DataAccess.SQL/. ./PaperLess.DataAccess.SQL/
+COPY PaperLess.DataAccess.Tests/. ./PaperLess.DataAccess.Tests/
 COPY PaperLess.Elastic.Interfaces/. ./PaperLess.Elastic.Interfaces/
 COPY PaperLess.Queue.Interfaces/. ./PaperLess.Queue.Interfaces/
 

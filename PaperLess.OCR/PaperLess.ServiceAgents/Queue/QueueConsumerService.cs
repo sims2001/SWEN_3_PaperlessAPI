@@ -61,7 +61,7 @@ namespace PaperLess.ServiceAgents.Queue {
             var queueContent = JsonConvert.DeserializeObject<QueueContent>(receivedMessage);
 
             _logger.LogInformation($"I am Working MinIO Magic HERE!");
-            var documentStream = await GetMinIOFileContent(queueContent.UploadedName);
+            var documentStream = await GetMinIoFileContent(queueContent.UploadedName);
 
             _logger.LogInformation($"I am Working OCR Magic HERE!");
 
@@ -79,7 +79,7 @@ namespace PaperLess.ServiceAgents.Queue {
             });
         }
 
-        private async Task<FileStream?> GetMinIOFileContent(string filename){
+        private async Task<FileStream?> GetMinIoFileContent(string filename){
             string bucketName = "paperless-bucket";
             string filePath = Path.Combine("../", filename);
             try

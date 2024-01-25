@@ -11,7 +11,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PaperLess.DataAccess.Entities\PaperLess.DataAccess.Entities.csproj" />
     <ProjectReference Include="..\PaperLess.WebApi.Entities\PaperLess.WebApi.Entities.csproj" />
   </ItemGroup>
 </Project>

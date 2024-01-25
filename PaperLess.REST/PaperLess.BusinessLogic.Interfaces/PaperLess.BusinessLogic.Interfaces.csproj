@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="..\PaperLess.BusinessLogic.Entities\PaperLess.BusinessLogic.Entities.csproj" />
+    <ProjectReference Include="..\PaperLess.Elastic.Interfaces\PaperLess.Elastic.Interfaces.csproj" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
