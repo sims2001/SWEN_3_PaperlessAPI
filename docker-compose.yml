@@ -59,11 +59,10 @@ services:
 
   paperless-webapi:
     container_name: paperless-webapi
-    #image: paperless-webapi
-    #image: sims2001/paperless-webapi:master
-    build: 
-      context: ./PaperLess.REST
-      dockerfile: Dockerfile
+    image: sims2001/paperless-webapi:master
+    #build: 
+    #  context: ./PaperLess.REST
+    #  dockerfile: Dockerfile
     restart: unless-stopped
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
@@ -104,9 +103,10 @@ services:
 
   paperless-ocr-worker:
     container_name: paperless-ocr-worker
-    build: 
-      context: .
-      dockerfile: ./PaperLess.OCR/Dockerfile
+    image: sims2001/paperless-ocr-worker:master
+    #build: 
+    #  context: .
+    #  dockerfile: ./PaperLess.OCR/Dockerfile
     restart: unless-stopped
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
