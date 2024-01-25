@@ -13,19 +13,19 @@
   - [x] Webserver erstellen
   - [x] UI Files hosten
 - [x] [Fluent Validation](https://moodle.technikum-wien.at/mod/resource/view.php?id=1487014)
-- [ ] Testing integrieren
-  - [ ] Library auswählen und Projekt erstellen
-  - [ ] Tests schreiben (70% Test-Coverage required)
+- [x] Testing integrieren
+  - [x] Library auswählen und Projekt erstellen
+  - [x] Tests schreiben 
 
 [WebUI](https://moodle.technikum-wien.at/mod/page/view.php?id=1487009)
 
 
 ## Sprint 3 - DAL
 
-- [ ] Data-Access-Layer aufbauen
+- [x] Data-Access-Layer aufbauen
   - [x] Projekt anlegen
   - [x] ORM-Mapper
-  - [ ] AutoMapper
+  - [x] AutoMapper
   - [x] bei Endpoints tatsächlich DB ansprechen
 - [ ] Testing integrieren
   - [ ] Library auswählen und Projekt erstellen
@@ -37,10 +37,10 @@
 
 ## Sprint 4 - Rabbit MQ + MinIO
 - [x] Dependency Injection
-- [ ] Logging
+- [x] Logging
     - [x] Logger Injecten
-    - [ ] Loggen
-- [ ] RabbitMQ Broker integrieren
+    - [x] Loggen
+- [x] RabbitMQ Broker integrieren
 - [x] MinIO File-Storage
 
 [RabbitMQ](https://moodle.technikum-wien.at/mod/lesson/view.php?id=1487054)
@@ -49,9 +49,9 @@
 
  ## Sprint 5 - RabbitMQ + OCR
 
-- [ ] tessract-ocr integrieren
-  - [ ] Container aufbauen
-  - [ ] Service worker erstellen
+- [x] tessract-ocr integrieren
+  - [x] Container aufbauen
+  - [x] Service worker erstellen
 
 [OCR Service](https://moodle.technikum-wien.at/mod/lesson/view.php?id=1487076)
 [Workers & Exception Handling](https://moodle.technikum-wien.at/mod/lesson/view.php?id=1487090)
@@ -59,9 +59,9 @@
 
 ## Sprint 6 - Elasticsearch
 
-- [ ] elastic-search
-  - [ ] container aufbauen
-  - [ ] service worker erstellen
+- [x] elastic-search
+  - [x] container aufbauen
+  - [x] service worker erstellen
 
 [Business Logic](https://moodle.technikum-wien.at/mod/lesson/view.php?id=1487102)
 [Integration Tests](https://moodle.technikum-wien.at/mod/lesson/view.php?id=1487111)
@@ -69,4 +69,4 @@
 
 ## Sprint 7 - Use Cases
 
-- [ ] implement Use-Cases
+- [x] implement Use-Cases

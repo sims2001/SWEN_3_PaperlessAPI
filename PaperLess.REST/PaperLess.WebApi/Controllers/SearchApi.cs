@@ -9,6 +9,7 @@ using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Newtonsoft.Json;
 using PaperLess.BusinessLogic.Interfaces;
+using PaperLess.BusinessLogic.Interfaces.BlExceptions;
 using PaperLess.WebApi.Attributes;
 using PaperLess.WebApi.Entities;
 using PaperLess.Elastic.Interfaces;
@@ -41,10 +42,18 @@ namespace PaperLess.WebApi.Controllers
         [SwaggerResponse(statusCode: 200, type: typeof(List<ElasticDoc>), description: "Success")]
         public virtual IActionResult SearchDocuments([FromQuery (Name = "searchTerm")]string searchTerm)
         {
-            _logger.LogInformation($"Search Request for: {searchTerm}");
-            var foundDocs = _searchLogic.SearchDocument(searchTerm);
+            try {
+                _logger.LogInformation($"Search Request for: {searchTerm}");
+                var foundDocs = _searchLogic.SearchDocument(searchTerm);
 
-            return new ObjectResult(foundDocs);
+                return new ObjectResult(foundDocs);
+            } catch (BlExceptionBase e) {
+                _logger.LogError($"An Exception occurred in the Business Layer: {e.Message}");
+                return StatusCode(500);
+            } catch (Exception e) {
+                _logger.LogError($"An unknown Exception occurred: {e.Message}");
+                return StatusCode(500);
+            }
         }
     }
 }

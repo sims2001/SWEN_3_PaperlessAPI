@@ -77,4 +77,22 @@ public class DocumentsApiTests
         
         logicMock.Verify(l => l.CreateDocument(It.IsAny<Document>()), Times.Once);
     }
+    
+    [Fact]
+    public async Task UploadDocument_MappingException()
+    {
+        var request = new CreateDocumentRequest();
+        var exMsg = "Error while Mapping the Request";
+        
+        var mapperMock = new Mock<IMapper>();
+        mapperMock.Setup(m => m.Map<Document>(request)).Throws(new AutoMapperMappingException(exMsg));
+        var logicMock = new Mock<IDocumentLogic>();
+        var loggerMock = new Mock<ILogger<DocumentsApiController>>();
+        
+        var api = new DocumentsApiController(logicMock.Object, mapperMock.Object, loggerMock.Object);
+
+        var result = api.UploadDocument(request);
+        
+        Assert.IsType<BadRequestObjectResult>(result);
+    }
 }

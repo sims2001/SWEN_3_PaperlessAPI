@@ -1,8 +1,10 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PaperLess.BusinessLogic.Entities;
 using PaperLess.DataAccess.Entities;
 using PaperLess.DataAccess.Interfaces;
+using PaperLess.DataAccess.Interfaces.DalExceptions;
 
 namespace PaperLess.DataAccess.SQL.PostgresRepositories{
 
@@ -14,20 +16,32 @@ namespace PaperLess.DataAccess.SQL.PostgresRepositories{
 
         public DocumentRepository(PaperLessDbContext context, IMapper mapper, ILogger<DocumentRepository> logger)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(_context));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(_mapper));
-            _logger = logger ?? throw new ArgumentNullException(nameof(_logger));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public int AddDocument(Document document)
         {
-            var newDoc = _mapper.Map<DocumentDAL>(document);
-            _context.Documents.Add(newDoc);
-            _context.SaveChanges();
+            try {
+                var newDoc = _mapper.Map<DocumentDAL>(document);
+                _context.Documents.Add(newDoc);
+                _context.SaveChanges();
 
-            _logger.LogInformation($"Saved Doc with Id: {newDoc.Id} to Database");
+                _logger.LogInformation($"Saved Doc with Id: {newDoc.Id} to Database");
 
-            return (int) newDoc.Id;
+                return (int) newDoc.Id;
+            } catch (AutoMapperMappingException e) {
+                _logger.LogError($"Error mapping document to DAL Entity: {e.Message}");
+                throw new MapperException("An error occurred in the DAL layer while mapping the document.", e);
+            } catch (DbUpdateException e) {
+                _logger.LogError($"Error updating the database: {e.Message}");
+                throw new DalDbException("An error occurred in the DAL layer while saving the document.", e);
+            } catch (Exception e) {
+                _logger.LogError($"Error adding document to the database: {e.Message}");
+                throw new DalExceptionBase("An unknown error occurred in the DAL layer", e);
+            }
+            
         }
 
         public void DeleteDocument(int id)

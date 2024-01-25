@@ -15,6 +15,7 @@ using PaperLess.BusinessLogic.Entities;
 using PaperLess.BusinessLogic.Interfaces;
 using PaperLess.WebApi.Attributes;
 using Microsoft.Extensions.Logging;
+using PaperLess.BusinessLogic.Interfaces.BlExceptions;
 using PaperLess.WebApi.Entities;
 
 namespace PaperLess.WebApi.Controllers
@@ -302,15 +303,27 @@ namespace PaperLess.WebApi.Controllers
         [SwaggerOperation("UploadDocument")]
         public virtual async Task<IActionResult> UploadDocument([FromForm] CreateDocumentRequest newDocumentRequest) {
 
-            _logger.LogInformation("New Document Upload Request");
-            var newDocument = _mapper.Map<Document>(newDocumentRequest);
+            try {
+                _logger.LogInformation("New Document Upload Request");
+                var newDocument = _mapper.Map<Document>(newDocumentRequest);
                        
-            var result = await _logic.CreateDocument(newDocument);
+                var result = await _logic.CreateDocument(newDocument);
 
-            if (!result.IsSuccess)
-                return BadRequest(new { errors = result.Errors });
+                if (!result.IsSuccess)
+                    return BadRequest(new { errors = result.Errors });
 
-            return Ok();
+                return Ok();
+            } catch (AutoMapperMappingException e) {
+                _logger.LogError($"Error while Mapping Request: {e.Message}");
+                return BadRequest();
+            } catch (BlExceptionBase e) {
+                _logger.LogError($"An Error occurred in the Business Layer: {e.Message}");
+                return StatusCode(500);
+            } catch (Exception e) {
+                _logger.LogError($"An unknown Exception occurred: {e.Message}");
+                return StatusCode(500);
+            }
+
         }
     }
 }

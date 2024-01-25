@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using PaperLess.BusinessLogic.Interfaces;
+using PaperLess.BusinessLogic.Interfaces.BlExceptions;
 using PaperLess.Elastic.Interfaces;
 
 namespace PaperLess.BusinessLogic;
@@ -17,7 +18,12 @@ public class SearchLogic : ISearchLogic
 
     public IEnumerable<ElasticDoc> SearchDocument(string searchTerm)
     {
-        _logger.LogInformation($"Searching for term: {searchTerm}");
-        return _searcher.SearchDocument(searchTerm);
+        try {
+            _logger.LogInformation($"Searching for term: {searchTerm}");
+            return _searcher.SearchDocument(searchTerm);
+        } catch (Exception e) {
+            _logger.LogError($"Could not search in elasticsearch: {e.Message}");
+            throw new BlSearchException($"Error while Searching for Term: {searchTerm}", e);
+        }
     }
 }
