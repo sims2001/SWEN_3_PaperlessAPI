@@ -30,6 +30,36 @@ public class DocumentLogicTests
     {
         _testOutputHelper = testOutputHelper;
     }
+
+    [Fact]
+    public void ValidationTest_Success()
+    {
+        var validDok = new Document
+        {
+            Title = "All thats NEeded.pdf"
+        };
+
+        var validator = new DocumentValidator();
+
+        var result = validator.Validate(validDok);
+
+        Assert.True(result.IsValid);
+    }
+    
+    [Fact]
+    public void ValidationTest_NoSuccess()
+    {
+        var inValidDok = new Document
+        {
+            Content = "Hello Workd"
+        };
+
+        var validator = new DocumentValidator();
+
+        var result = validator.Validate(inValidDok);
+
+        Assert.False(result.IsValid);
+    }
     
     [Fact]
     public async Task CreateDocument_ValidDocument_Success()

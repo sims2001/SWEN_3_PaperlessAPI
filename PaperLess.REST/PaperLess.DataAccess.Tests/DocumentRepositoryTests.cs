@@ -42,6 +42,5 @@ public class DocumentRepositoryTests
         contextMock.Verify(c => c.SaveChanges(), Times.Once);
         
         Assert.Equal(expectedId, result);
-
     }
 }
